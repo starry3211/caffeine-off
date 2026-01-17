@@ -2,12 +2,25 @@ import React from 'react';
 import './HeroSection.css';
 import orbTopOrange from '../assets/images/orb_top_orange.png';
 import orbBottomGreen from '../assets/images/orb_bottom_green.png';
+import cloudCharacterImg from '../assets/images/cloud_character.png';
+
+import { BiCog } from 'react-icons/bi';
+
+import CaffeineSettingsSheet from './CaffeineSettingsSheet';
 
 const HeroSection: React.FC = () => {
-    // Mock data
-    const currentIntake = 45;
-    const maxIntake = 300;
-    const progressPercentage = (currentIntake / maxIntake) * 100;
+    // State
+    const [currentIntake] = React.useState(45); // Mock current
+    const [maxIntake, setMaxIntake] = React.useState(300);
+
+    // Settings Sheet State
+    const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
+
+    const progressPercentage = Math.min((currentIntake / maxIntake) * 100, 100);
+
+    const handleSaveSettings = (newMax: number) => {
+        setMaxIntake(newMax);
+    };
 
     // Typing effect logic
     const [placeholder, setPlaceholder] = React.useState('');
@@ -46,18 +59,26 @@ const HeroSection: React.FC = () => {
 
     return (
         <section className="hero-section">
-            <h1 className="hero-greeting">다혜님,<br />오늘도 같이 카페인 Off 해요 🌿</h1>
+            <h1 className="hero-greeting">다혜님,<br />커피 <span style={{ color: '#00D1B2' }}>1.5잔</span> 정도는 더 마셔도 돼요 🌿</h1>
 
             <div className="hero-decoration-wrapper">
                 <img src={orbTopOrange} alt="" className="hero-orb orb-1" />
                 <img src={orbBottomGreen} alt="" className="hero-orb orb-2" />
 
                 <div className="caffeine-status-card">
+                    <button
+                        className="card-settings-btn"
+                        aria-label="Settings"
+                        onClick={() => setIsSettingsOpen(true)}
+                    >
+                        <BiCog size={20} />
+                    </button>
+                    <img src={cloudCharacterImg} alt="Caffeine Off Mascot" className="hero-character-mascot" />
                     <p className="caffeine-info-text">
-                        오늘 섭취한 카페인은 현재 <br />
+                        오늘 섭취한 카페인은 지금까지 <br />
                         <span className="sc-value">{currentIntake}mg</span>
                         <span className="sc-divider"> / </span>
-                        <span className="sc-max">{maxIntake}mg</span> 입니다.
+                        <span className="sc-max">{maxIntake}mg</span> 이에요
                     </p>
 
                     <div className="progress-bar-container">
@@ -91,6 +112,13 @@ const HeroSection: React.FC = () => {
                     </button>
                 </div>
             </div>
+
+            <CaffeineSettingsSheet
+                isOpen={isSettingsOpen}
+                onClose={() => setIsSettingsOpen(false)}
+                currentMax={maxIntake}
+                onApply={handleSaveSettings}
+            />
         </section>
     );
 };

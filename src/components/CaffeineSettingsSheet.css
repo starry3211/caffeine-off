@@ -1,0 +1,184 @@
+.sheet-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.sheet-content {
+    background: #fff;
+    width: 100%;
+    max-width: 430px;
+    /* Mobile width constraint */
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    padding-bottom: 40px;
+    /* Safe area */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sheet-header {
+    margin-bottom: 20px;
+}
+
+.sheet-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.sheet-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.sheet-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 16px;
+    background: #f8fafb;
+    /* Soft slate light */
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.sheet-option.selected {
+    border-color: var(--accent-vital-mint);
+    background: rgba(0, 209, 178, 0.05);
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Hide default radio */
+.sheet-option input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    position: relative;
+    outline: none;
+}
+
+.sheet-option.selected input[type="radio"] {
+    border-color: var(--accent-vital-mint);
+}
+
+.sheet-option.selected input[type="radio"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: var(--accent-vital-mint);
+    border-radius: 50%;
+}
+
+.option-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.option-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.option-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.check-icon {
+    color: var(--accent-vital-mint);
+}
+
+.custom-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0 16px;
+    margin-top: -4px;
+    margin-left: 16px;
+    /* Indent slightly ? or just full width */
+    margin-left: 0;
+}
+
+.custom-input-wrapper:focus-within {
+    border-color: var(--accent-vital-mint);
+}
+
+.custom-input {
+    flex: 1;
+    border: none;
+    padding: 14px 0;
+    font-size: 16px;
+    outline: none;
+    color: var(--text-primary);
+}
+
+.unit-text {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.sheet-submit-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--primary-midnight-teal);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.sheet-submit-btn:hover {
+    opacity: 0.9;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

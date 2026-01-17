@@ -80,7 +80,38 @@
     box-shadow: 0 8px 32px 0 rgba(16, 53, 58, 0.1);
     border-radius: 24px;
     padding: 24px;
-    overflow: hidden;
+    overflow: visible;
+    /* Allowing the character to pop out */
+    margin-top: 150px;
+    /* Greatly increased space for larger mascot */
+}
+
+.hero-character-mascot {
+    position: absolute;
+    top: -140px;
+    /* Adjusted for larger size */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    /* Even larger size */
+    height: auto;
+    z-index: 10;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    animation: float-centered 3s ease-in-out infinite;
+}
+
+@keyframes float-centered {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-15px);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0px);
+    }
 }
 
 .caffeine-info-text {
@@ -148,6 +179,30 @@
     z-index: 2;
     /* Ensure clickable */
     width: 100%;
+}
+
+.card-settings-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    cursor: pointer;
+    z-index: 20;
+    /* Above mascot if overlaps, though mascot is generally centered */
+    transition: background 0.2s;
+}
+
+.card-settings-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--primary-midnight-teal);
 }
 
 .hero-search-input {
