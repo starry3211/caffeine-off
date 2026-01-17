@@ -17,7 +17,7 @@ const HeroSection: React.FC = () => {
 
     const phrases = React.useMemo(() => [
         "집에서 혼자 밤에 힐링할 수 있는 티를 추천해줘",
-        "연남동에 산미 적은 디카페인 커피를 파는 곳을 알려줘"
+        "연남동에 산미 적은 디카페인 커피 카페 찾아줘"
     ], []);
 
     React.useEffect(() => {
