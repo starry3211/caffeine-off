@@ -1,0 +1,70 @@
+.bottom-nav {
+    position: fixed;
+    bottom: 30px;
+    /* Floating */
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    /* Margins on side */
+    max-width: 390px;
+    /* slightly less than max container */
+    height: 70px;
+    background: rgba(255, 255, 255, 0.85);
+    /* Light glass */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 35px;
+    /* Pill shape */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 10px 40px rgba(16, 53, 58, 0.15);
+    padding-bottom: 0;
+    /* Removing safe area padding from inside the pill */
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    gap: 4px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.nav-item.active {
+    color: #fff;
+    background: var(--accent-vital-mint);
+    /* Mint for active tab */
+    box-shadow: 0 4px 15px rgba(0, 209, 178, 0.4);
+    /* transform: translateY(-5px); Removed to keep inside layout */
+}
+
+/* Hide label for cleaner look like reference, or keep small? 
+   Reference shows active item with distinct background. 
+   Let's keep text but make active item special. */
+.nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.nav-item.active .nav-label {
+    display: none;
+    /* Hide text on active to just show big icon like reference style potentially, 
+                    OR keep it. Reference image hides text mostly or has it below. 
+                    Let's hide label for active to make it cleaner */
+}
+
+.nav-item.active svg {
+    width: 28px;
+    height: 28px;
+}

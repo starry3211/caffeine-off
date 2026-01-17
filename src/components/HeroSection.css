@@ -1,0 +1,210 @@
+.hero-section {
+    padding: 0 var(--safe-area-padding);
+    margin-top: 0;
+    /* Clear margin */
+    padding-top: 80px;
+    /* Space for fixed header */
+    margin-bottom: 30px;
+}
+
+.hero-greeting {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 10;
+    /* Ensure text sits above decorative orbs */
+}
+
+/* Decoration Wrapper to hold blobs relative to card */
+.hero-decoration-wrapper {
+    position: relative;
+    /* Ensure container bounds explicitly if needed, but relative works */
+}
+
+/* Decorative Orbs */
+.hero-orb {
+    position: absolute;
+    /* Removed border-radius/filter since images are pre-styled or handled differently */
+    z-index: 0;
+    /* Behind the card */
+    opacity: 0.9;
+    /* Slightly higher opacity for images */
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.orb-1 {
+    width: 200px;
+    /* Adjusted size for image */
+    height: 200px;
+    top: -50px;
+    left: -40px;
+    animation: float 5s ease-in-out infinite;
+}
+
+.orb-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -60px;
+    right: -40px;
+    animation: float 7s ease-in-out infinite 1s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.caffeine-status-card {
+    position: relative;
+    /* Stacking context */
+    z-index: 1;
+    /* Above orbs */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4));
+    /* Light mode glass */
+    backdrop-filter: blur(20px);
+    /* Increased blur for glass effect over blobs */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(16, 53, 58, 0.1);
+    border-radius: 24px;
+    padding: 24px;
+    overflow: hidden;
+}
+
+.caffeine-info-text {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.sc-value {
+    color: var(--digital-mint);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.sc-divider {
+    color: var(--text-secondary);
+}
+
+.sc-max {
+    color: var(--text-primary);
+    opacity: 0.8;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--glass-blue-light);
+    border-radius: 4px;
+    /* Optional animation */
+    transition: width 0.5s ease-out;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(76, 175, 80, 0.15);
+    /* Semi-transparent green */
+    color: #4CAF50;
+    /* Green text */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hero-search-container {
+    position: relative;
+    margin-top: 20px;
+    z-index: 2;
+    /* Ensure clickable */
+    width: 100%;
+}
+
+.hero-search-input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    border-radius: 20px;
+    border: 1px solid #00D1B2;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(16, 53, 58, 0.05);
+    /* Match global shadow tone */
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.hero-search-input:focus {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 20px rgba(16, 53, 58, 0.1);
+    border-color: #fff;
+}
+
+.hero-search-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.hero-search-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--primary-midnight-teal);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.hero-search-btn:hover {
+    opacity: 1;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+}
+
+.status-message {
+    font-size: 14px;
+    color: var(--text-secondary);
+}

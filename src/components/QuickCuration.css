@@ -1,0 +1,84 @@
+.curation-section {
+    padding: 0;
+    /* Remove padding here to let slider handle it */
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    padding: 0 var(--safe-area-padding);
+    /* Title needs padding now */
+    /* Optional: sticky left align if needed, but padding handles it */
+}
+
+/* Slider container - horizontal scroll */
+.curation-slider {
+    display: flex;
+    justify-content: space-between;
+    /* Equal spacing */
+    gap: 12px;
+    overflow-x: visible;
+    /* No scroll needed if fitting */
+    padding: 0 var(--safe-area-padding);
+    /* Symmetric padding */
+    padding-bottom: 12px;
+    /* Space for scrollbar/shadow */
+}
+
+.quick-curation-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    min-width: 72px;
+    /* Ensure click area */
+}
+
+.qc-icon-wrapper {
+    width: 115px;
+    /* Maximum size for 3 items (approx 1/3 of screen) */
+    height: 115px;
+    /* Removed background, border, shadow for clean icon look */
+    background: none;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.quick-curation-item:hover .qc-icon-wrapper {
+    transform: translateY(-2px);
+    background: none;
+    /* No background on hover either */
+}
+
+.qc-emoji {
+    font-size: 48px;
+}
+
+.qc-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* scaling slightly down so it fits nicely inside rounded square */
+    transform: scale(0.85);
+}
+
+.qc-label {
+    font-size: 15px;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 500;
+    max-width: 115px;
+    /* match wrapper width */
+    word-break: keep-all;
+}

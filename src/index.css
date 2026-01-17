@@ -1,0 +1,110 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root {
+  /* New Color Palette */
+  --primary-midnight-teal: #10353A;
+  --secondary-airy-teal: #E6F2F2;
+  --accent-vital-mint: #00D1B2;
+  --bg-soft-slate: #F8FAFB;
+  --neutral-deep-charcoal: #2C3E50;
+  --alert-sunset-orange: #FF7043;
+
+  /* Mapping legacy variables to new palette for compatibility */
+  --midnight-navy: var(--bg-soft-slate);
+  /* Background is now light */
+  --digital-mint: var(--accent-vital-mint);
+  --glass-blue-primary: var(--primary-midnight-teal);
+  --glass-blue-light: var(--accent-vital-mint);
+
+  /* Text Colors - Adapted for Light Theme */
+  --text-primary: var(--neutral-deep-charcoal);
+  /* Main text is now dark */
+  --text-secondary: rgba(44, 62, 80, 0.7);
+  /* Dark text with opacity */
+  --text-dark: #111111;
+
+  /* Glassmorphism Variables - Adapted for Light Theme */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  /* More opaque white for light bg */
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 8px 32px 0 rgba(16, 53, 58, 0.1);
+  /* Teal tinted shadow */
+  --glass-blur: 16px;
+
+  /* Spacing & Layout */
+  --safe-area-padding: 20px;
+  --bottom-nav-height: 60px;
+}
+
+/* Glass Utility Class */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  background-color: #E0E5EC;
+  /* Outer background for PC view */
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 430px;
+  /* Mobile width constraint */
+  background-color: var(--secondary-airy-teal);
+  /* #E6F2F2 */
+  background-image:
+    linear-gradient(180deg,
+      var(--secondary-airy-teal) 0%,
+      rgba(255, 255, 255, 0.5) 40%,
+      rgba(0, 209, 178, 0.15) 100%);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+  box-shadow: 0 0 60px rgba(16, 53, 58, 0.1);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Scrollbar hiding for horizontal scroll areas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

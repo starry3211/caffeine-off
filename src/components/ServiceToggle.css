@@ -1,0 +1,60 @@
+.service-toggle-section {
+    padding: 0 var(--safe-area-padding);
+    margin-bottom: 40px;
+}
+
+.toggle-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.6);
+    /* Semi-transparent white */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 6px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    gap: 8px;
+    /* Added gap to replace divider */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-btn {
+    flex: 1 1 0;
+    /* Equal width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    color: var(--text-secondary);
+    /* This will be dark now */
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.toggle-btn.active {
+    color: #fff;
+    /* Keep text white on active button */
+    background: var(--primary-midnight-teal);
+    box-shadow: 0 4px 12px rgba(16, 53, 58, 0.3);
+    font-weight: 700;
+}
+
+.toggle-title {
+    font-size: 15px;
+    margin-bottom: 0;
+    /* Removed margin for vertical centering */
+    text-align: center;
+}
+
+.toggle-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.toggle-divider {
+    display: none;
+}
