@@ -1,7 +1,7 @@
 import React from 'react';
 import './HeroSection.css';
-import orbTopOrange from '../assets/images/orb_top_orange.png';
-import orbBottomGreen from '../assets/images/orb_bottom_green.png';
+import orbTopOrange from '../assets/images/orb_top_cloud.png';
+import orbBottomGreen from '../assets/images/orb_bottom_cloud.png';
 import cloudCharacterImg from '../assets/images/cloud_character.png';
 
 import { BiCog } from 'react-icons/bi';
@@ -64,6 +64,7 @@ const HeroSection: React.FC = () => {
             <div className="hero-decoration-wrapper">
                 <img src={orbTopOrange} alt="" className="hero-orb orb-1" />
                 <img src={orbBottomGreen} alt="" className="hero-orb orb-2" />
+                <img src={orbTopOrange} alt="" className="hero-orb orb-3" />
 
                 <div className="caffeine-status-card">
                     <button
