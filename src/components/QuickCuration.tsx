@@ -6,9 +6,9 @@ import energyImg from '../assets/images/quick_energy.png';
 
 const QuickCuration: React.FC = () => {
     const curios = [
-        { emoji: '🌙', text: '딥나잇, 디카페인', image: decafImg },
-        { emoji: '⚡', text: '가벼운 Low 카페인', image: energyImg },
-        { emoji: '🤰', text: '릴렉스 티', image: teaImg },
+        { emoji: '🌙', text: '딥나잇\n디카페인', image: decafImg },
+        { emoji: '⚡', text: '가벼운\nLow 카페인', image: energyImg },
+        { emoji: '🤰', text: '편안하게\n릴렉스 티', image: teaImg },
     ];
 
     return (

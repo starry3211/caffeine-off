@@ -81,4 +81,6 @@
     max-width: 115px;
     /* match wrapper width */
     word-break: keep-all;
+    white-space: pre-line;
+    /* Allow \n to break lines */
 }
