@@ -5,10 +5,12 @@
 
 .toggle-container {
     display: flex;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.3);
+    /* Increased transparency */
     /* Semi-transparent white */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    /* Increased blur */
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 20px;
     padding: 6px;
     position: relative;

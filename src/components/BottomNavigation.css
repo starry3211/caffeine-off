@@ -9,7 +9,7 @@
     max-width: 390px;
     /* slightly less than max container */
     height: 70px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.4);
     /* Light glass */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);

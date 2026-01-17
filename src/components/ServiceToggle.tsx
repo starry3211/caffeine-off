@@ -1,3 +1,6 @@
+import React from 'react';
+import './ServiceToggle.css';
+
 interface ServiceToggleProps {
     activeMode: 'cafe' | 'home';
     onToggle: (mode: 'cafe' | 'home') => void;
