@@ -18,6 +18,10 @@ const CaffeineSettingsSheet: React.FC<CaffeineSettingsSheetProps> = ({
     const [selectedOption, setSelectedOption] = useState<number | 'custom'>(currentMax);
     const [customValue, setCustomValue] = useState<string>('');
 
+    // Sleep Time State
+    const [sleepTimeAmPm, setSleepTimeAmPm] = useState<'AM' | 'PM'>('PM');
+    const [sleepTimeValue, setSleepTimeValue] = useState<string>('11');
+
     // Sync state when opening
     useEffect(() => {
         if (isOpen) {
@@ -115,6 +119,39 @@ const CaffeineSettingsSheet: React.FC<CaffeineSettingsSheetProps> = ({
                             <span className="unit-text">mg</span>
                         </div>
                     )}
+                </div>
+
+                <div className="section-divider"></div>
+
+                <div className="sheet-body">
+                    <h3 className="setting-section-title">잠 드는 시간</h3>
+                    <div className="sleep-time-controls">
+                        <div className="ampm-toggle">
+                            <button
+                                className={`ampm-btn ${sleepTimeAmPm === 'AM' ? 'active' : ''}`}
+                                onClick={() => setSleepTimeAmPm('AM')}
+                            >
+                                오전
+                            </button>
+                            <button
+                                className={`ampm-btn ${sleepTimeAmPm === 'PM' ? 'active' : ''}`}
+                                onClick={() => setSleepTimeAmPm('PM')}
+                            >
+                                오후
+                            </button>
+                        </div>
+                        <div className="time-input-container">
+                            <input
+                                type="number"
+                                inputMode="numeric"
+                                className="time-input"
+                                value={sleepTimeValue}
+                                onChange={(e) => setSleepTimeValue(e.target.value)}
+                                placeholder="11"
+                            />
+                            <span className="time-unit">시</span>
+                        </div>
+                    </div>
                 </div>
 
                 <button className="sheet-submit-btn" onClick={handleApply}>

@@ -182,3 +182,93 @@
         opacity: 1;
     }
 }
+
+/* Divider */
+.section-divider {
+    height: 1px;
+    background: #eee;
+    margin: 0 -24px 24px;
+    width: calc(100% + 48px);
+}
+
+/* Sleep Time Section */
+.setting-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+}
+
+.sleep-time-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.ampm-toggle {
+    display: flex;
+    background: #f1f3f5;
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+}
+
+.ampm-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.ampm-btn.active {
+    background: #fff;
+    color: var(--text-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.time-input-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #f8fafb;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    padding: 0 16px;
+    gap: 8px;
+    min-width: 0;
+    /* Prevent flex overflow */
+    box-sizing: border-box;
+    /* Ensure padding included in width */
+}
+
+.time-input-container:focus-within {
+    border-color: var(--accent-vital-mint);
+    background: #fff;
+}
+
+.time-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 12px 0;
+    outline: none;
+    text-align: right;
+    min-width: 0;
+    /* Allow input to shrink if needed */
+}
+
+.time-unit {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    /* Prevent unit wrapping */
+}

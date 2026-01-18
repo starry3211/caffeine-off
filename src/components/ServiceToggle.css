@@ -60,3 +60,70 @@
 .toggle-divider {
     display: none;
 }
+
+/* Sub Toggle Styles */
+.sub-toggle-container {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Spread layout for emphasis */
+    padding: 12px 16px;
+    gap: 10px;
+    animation: fadeIn 0.3s ease-out;
+    background: rgba(255, 255, 255, 0.4);
+    /* Highlighting background */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(16, 53, 58, 0.05);
+}
+
+.sub-toggle-label {
+    font-size: 15px;
+    color: var(--primary-midnight-teal);
+    font-weight: 700;
+}
+
+.sub-toggle-switch {
+    width: 44px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    padding: 0;
+}
+
+.sub-toggle-switch.active {
+    background-color: var(--accent-vital-mint);
+}
+
+.sub-toggle-knob {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sub-toggle-switch.active .sub-toggle-knob {
+    transform: translateX(20px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

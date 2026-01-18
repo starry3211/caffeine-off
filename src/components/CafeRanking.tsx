@@ -1,18 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CafeRanking.css';
+import { BiTargetLock, BiChevronDown } from 'react-icons/bi';
 
 const CafeRanking: React.FC = () => {
+    const [sortMode, setSortMode] = useState<'popular' | 'distance'>('popular');
+
     const rankings = [
         { rank: 1, brand: '스타벅스', menu: '디카페인 아메리카노', caffeine: 5 },
         { rank: 2, brand: '투썸플레이스', menu: 'SWP 디카페인 라떼', caffeine: 0 },
         { rank: 3, brand: '폴바셋', menu: '디카페인 룽고', caffeine: 10 },
+        { rank: 4, brand: '이디야커피', menu: '디카페인 콜드브루', caffeine: 9 },
+        { rank: 5, brand: '메가커피', menu: '디카페인 아메리카노', caffeine: 7 },
     ];
 
     return (
         <section className="ranking-section">
-            <h2 className="section-title" style={{ paddingLeft: 'var(--safe-area-padding)' }}>
-                실시간 인기 디카페인 카페
-            </h2>
+            <div className="ranking-controls">
+                <div className="location-row">
+                    <button className="location-btn current">
+                        <BiTargetLock size={16} />
+                        현위치
+                    </button>
+                    <span className="location-divider">|</span>
+                    <button className="location-btn region">
+                        연남동 <BiChevronDown size={16} />
+                    </button>
+                </div>
+
+                <div className="sort-row">
+                    <button
+                        className={`sort-btn ${sortMode === 'popular' ? 'active' : ''}`}
+                        onClick={() => setSortMode('popular')}
+                    >
+                        인기순
+                    </button>
+                    <button
+                        className={`sort-btn ${sortMode === 'distance' ? 'active' : ''}`}
+                        onClick={() => setSortMode('distance')}
+                    >
+                        거리순
+                    </button>
+                </div>
+            </div>
 
             <ul className="ranking-list">
                 {rankings.map((item) => (
@@ -32,7 +61,7 @@ const CafeRanking: React.FC = () => {
             </ul>
 
             <button className="more-link-btn">
-                {'>'} 더 많은 카페 메뉴 비교하기
+                더 많은 카페 보기
             </button>
         </section>
     );

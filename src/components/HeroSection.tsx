@@ -59,7 +59,12 @@ const HeroSection: React.FC = () => {
 
     return (
         <section className="hero-section">
-            <h1 className="hero-greeting">다혜님,<br />커피 <span style={{ color: '#00D1B2' }}>1.5잔</span> 정도는 더 마셔도 돼요 🌿</h1>
+            <div className="hero-wave-bg">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#00D1B2" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+                </svg>
+            </div>
+            <h1 className="hero-greeting">다혜님,<br />커피 <span style={{ color: '#FFE082' }}>1.5잔</span> 정도는 더 마셔도 돼요 🌿</h1>
 
             <div className="hero-decoration-wrapper">
                 <img src={orbTopOrange} alt="" className="hero-orb orb-1" />
@@ -94,7 +99,7 @@ const HeroSection: React.FC = () => {
                             <span className="status-dot"></span>
                             안심
                         </div>
-                        <span className="status-message">숙면까지 8시간 남았어요!</span>
+                        <span className="status-message">잠드는 시간까지 8시간 남았어요!</span>
                     </div>
                 </div>
 
