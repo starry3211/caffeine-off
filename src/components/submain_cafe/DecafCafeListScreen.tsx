@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './DecafCafeListScreen.css';
-import { BiCoffee, BiTargetLock, BiChevronDown } from 'react-icons/bi';
+import { BiTargetLock, BiChevronDown } from 'react-icons/bi';
 import GlobalNavigation from '../main/GlobalNavigation';
 
 interface CafeItem {
