@@ -49,3 +49,26 @@
     font-weight: 400;
     margin-left: 4px;
 }
+
+.see-more-btn {
+    display: block;
+    width: 100%;
+    margin: 20px 0 0;
+    text-align: center;
+    padding: 10px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.see-more-btn:hover {
+    color: var(--text-primary);
+    background: transparent;
+}

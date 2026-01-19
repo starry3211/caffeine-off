@@ -1,0 +1,227 @@
+.decaf-cafe-screen {
+    padding-bottom: 100px;
+    min-height: 100vh;
+    background: transparent;
+    /* Let global gradient show through */
+}
+
+.screen-header {
+    background: transparent;
+    padding: 16px var(--safe-area-padding);
+    padding-top: 70px;
+    /* Adjusted for fixed GlobalNavigation (approx 60px height) */
+    position: relative;
+    z-index: 10;
+}
+
+.screen-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--text-primary);
+}
+
+.screen-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Controls Section */
+.controls-section {
+    padding: 16px var(--safe-area-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Coffee Toggle Wrapper */
+.coffee-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(16, 53, 58, 0.05);
+}
+
+.sub-toggle-label {
+    font-size: 15px;
+    color: var(--primary-midnight-teal);
+    font-weight: 700;
+}
+
+.sub-toggle-switch {
+    width: 44px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    padding: 0;
+}
+
+.sub-toggle-switch.active {
+    background-color: var(--accent-vital-mint);
+}
+
+.sub-toggle-knob {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sub-toggle-switch.active .sub-toggle-knob {
+    transform: translateX(20px);
+}
+
+/* Ranking Controls (Copied & Adapted) */
+.ranking-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.location-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0;
+}
+
+.location-btn.current {
+    /* Style for current location button */
+}
+
+.location-btn.region {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.location-divider {
+    color: rgba(0, 0, 0, 0.1);
+    font-size: 10px;
+}
+
+.sort-row {
+    display: flex;
+    gap: 8px;
+}
+
+.sort-btn {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    font-weight: 500;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.sort-btn.active {
+    color: var(--text-primary);
+    font-weight: 800;
+    opacity: 1;
+}
+
+/* List Styles */
+.cafe-list-container {
+    padding: 0 var(--safe-area-padding) 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cafe-list-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    gap: 16px;
+    box-shadow: var(--glass-shadow);
+}
+
+.item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(0, 209, 178, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-logo-placeholder {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent-vital-mint);
+}
+
+.item-info {
+    flex: 1;
+}
+
+.rank-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.item-brand {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.location-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    border-radius: 4px;
+}
+
+.item-menu {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.item-caffeine {
+    color: var(--digital-mint);
+    font-weight: 500;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}

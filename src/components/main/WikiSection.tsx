@@ -10,7 +10,9 @@ const WikiSection: React.FC = () => {
 
     return (
         <section className="wiki-section">
-            <h2 className="section-title">카페인 위키</h2>
+            <h2 className="section-title" style={{ paddingLeft: 'var(--safe-area-padding)' }}>
+                카페인 위키
+            </h2>
             <div className="wiki-list">
                 {contents.map((item, index) => (
                     <button key={index} className="wiki-item">

@@ -2,42 +2,45 @@ import React from 'react';
 import { BiHomeAlt, BiCoffee, BiShoppingBag, BiBarChart, BiMessageRoundedDots } from 'react-icons/bi';
 import './BottomNavigation.css';
 
-const BottomNavigation: React.FC = () => {
-    const [activeTab, setActiveTab] = React.useState('home');
+interface BottomNavigationProps {
+    activeTab: string;
+    onTabChange: (tab: string) => void;
+}
 
+const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, onTabChange }) => {
     return (
         <nav className="bottom-nav">
             <button
                 className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
-                onClick={() => setActiveTab('home')}
+                onClick={() => onTabChange('home')}
             >
                 <BiHomeAlt size={24} />
                 <span className="nav-label">홈</span>
             </button>
             <button
                 className={`nav-item ${activeTab === 'cafe' ? 'active' : ''}`}
-                onClick={() => setActiveTab('cafe')}
+                onClick={() => onTabChange('cafe')}
             >
                 <BiCoffee size={24} />
                 <span className="nav-label">카페</span>
             </button>
             <button
                 className={`nav-item ${activeTab === 'shop' ? 'active' : ''}`}
-                onClick={() => setActiveTab('shop')}
+                onClick={() => onTabChange('shop')}
             >
                 <BiShoppingBag size={24} />
                 <span className="nav-label">쇼핑</span>
             </button>
             <button
                 className={`nav-item ${activeTab === 'log' ? 'active' : ''}`}
-                onClick={() => setActiveTab('log')}
+                onClick={() => onTabChange('log')}
             >
                 <BiBarChart size={24} />
                 <span className="nav-label">로그</span>
             </button>
             <button
                 className={`nav-item ${activeTab === 'comm' ? 'active' : ''}`}
-                onClick={() => setActiveTab('comm')}
+                onClick={() => onTabChange('comm')}
             >
                 <BiMessageRoundedDots size={24} />
                 <span className="nav-label">커뮤</span>

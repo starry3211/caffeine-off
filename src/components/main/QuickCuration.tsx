@@ -1,8 +1,8 @@
 import React from 'react';
 import './QuickCuration.css';
-import decafImg from '../assets/images/quick_decaf.png';
-import teaImg from '../assets/images/quick_tea.png';
-import energyImg from '../assets/images/quick_energy.png';
+import decafImg from '../../assets/images/quick_decaf.png';
+import teaImg from '../../assets/images/quick_tea.png';
+import energyImg from '../../assets/images/quick_energy.png';
 
 const QuickCuration: React.FC = () => {
     const curios = [
@@ -13,7 +13,8 @@ const QuickCuration: React.FC = () => {
 
     return (
         <section className="curation-section">
-            <div className="curation-slider no-scrollbar">
+            <h2 className="section-title">Product Category</h2>
+            <div className="curation-grid">
                 {curios.map((item, index) => (
                     <button key={index} className="quick-curation-item">
                         <div className="qc-icon-wrapper">

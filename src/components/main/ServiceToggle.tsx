@@ -7,9 +7,6 @@ interface ServiceToggleProps {
 }
 
 const ServiceToggle: React.FC<ServiceToggleProps> = ({ activeMode, onToggle }) => {
-    // Local state for Coffee Only trigger toggle (UI only as per plan, or could be lifted later)
-    const [isCoffeeOnly, setIsCoffeeOnly] = React.useState(true);
-
     return (
         <section className="service-toggle-section">
             <div className="toggle-container">
@@ -25,17 +22,6 @@ const ServiceToggle: React.FC<ServiceToggleProps> = ({ activeMode, onToggle }) =
                     onClick={() => onToggle('home')}
                 >
                     <span className="toggle-title">집/사무실에서</span>
-                </button>
-            </div>
-
-            <div className="sub-toggle-container">
-                <span className="sub-toggle-label">Coffee only</span>
-                <button
-                    className={`sub-toggle-switch ${isCoffeeOnly ? 'active' : ''}`}
-                    onClick={() => setIsCoffeeOnly(!isCoffeeOnly)}
-                    aria-label="Toggle coffee only"
-                >
-                    <div className="sub-toggle-knob" />
                 </button>
             </div>
         </section>

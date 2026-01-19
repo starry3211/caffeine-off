@@ -28,6 +28,19 @@
     /* Space for scrollbar/shadow */
 }
 
+.curation-grid {
+    display: flex;
+    justify-content: space-between;
+    /* Equal spacing */
+    gap: 12px;
+    overflow-x: visible;
+    /* No scroll needed if fitting */
+    padding: 0 var(--safe-area-padding);
+    /* Symmetric padding */
+    padding-bottom: 12px;
+    /* Space for scrollbar/shadow */
+}
+
 .quick-curation-item {
     display: flex;
     flex-direction: column;

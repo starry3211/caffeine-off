@@ -1,8 +1,8 @@
 import React from 'react';
 import './HeroSection.css';
-import orbTopOrange from '../assets/images/orb_top_cloud.png';
-import orbBottomGreen from '../assets/images/orb_bottom_cloud.png';
-import cloudCharacterImg from '../assets/images/cloud_character.png';
+import orbTopOrange from '../../assets/images/orb_top_cloud.png';
+import orbBottomGreen from '../../assets/images/orb_bottom_cloud.png';
+import cloudCharacterImg from '../../assets/images/cloud_character.png';
 
 import { BiCog } from 'react-icons/bi';
 
@@ -104,18 +104,21 @@ const HeroSection: React.FC = () => {
                 </div>
 
                 <div className="hero-search-container">
-                    <input
-                        type="text"
-                        className="hero-search-input"
-                        placeholder={placeholder}
-                        aria-label="Ask AI about caffeine-free options"
-                    />
-                    <button className="hero-search-btn" aria-label="Search">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                    </button>
+                    <h3 className="hero-search-title">원하는 카페나 제품을 검색해 보세요</h3>
+                    <div className="search-input-wrapper">
+                        <input
+                            type="text"
+                            className="hero-search-input"
+                            placeholder={placeholder}
+                            aria-label="Ask AI about caffeine-free options"
+                        />
+                        <button className="hero-search-btn" aria-label="Search">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
 
