@@ -14,6 +14,8 @@ function App() {
     const [activeMode, setActiveMode] = useState<'cafe' | 'home'>('cafe');
     const [currentTab, setCurrentTab] = useState('home');
 
+    const [isCoffeeOnly, setIsCoffeeOnly] = useState(false);
+
     const renderContent = () => {
         if (currentTab === 'cafe') {
             return <DecafCafeListScreen />;
@@ -25,7 +27,12 @@ function App() {
                 <GlobalNavigation />
                 <HeroSection />
                 <QuickCuration />
-                <ServiceToggle activeMode={activeMode} onToggle={setActiveMode} />
+                <ServiceToggle
+                    activeMode={activeMode}
+                    onToggle={setActiveMode}
+                    isCoffeeOnly={isCoffeeOnly}
+                    onCoffeeOnlyToggle={setIsCoffeeOnly}
+                />
 
                 {/* Show CafeRanking only in 'cafe' mode (inside Home Tab toggles) */}
                 {activeMode === 'cafe' && <CafeRanking />}

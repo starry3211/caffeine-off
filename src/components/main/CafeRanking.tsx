@@ -46,7 +46,11 @@ const CafeRanking: React.FC = () => {
             <ul className="ranking-list">
                 {rankings.map((item) => (
                     <li key={item.rank} className="ranking-item">
-                        <span className="rank-number">{item.rank}</span>
+                        <div className="item-icon">
+                            <div className="brand-logo-placeholder">
+                                {item.brand[0]}
+                            </div>
+                        </div>
                         <div className="rank-info">
                             <div className="rank-brand-row">
                                 <span className="rank-brand">{item.brand}</span>
