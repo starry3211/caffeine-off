@@ -58,7 +58,7 @@ const DecafCafeListScreen: React.FC = () => {
             <GlobalNavigation />
 
             <header className="screen-header">
-                <h2 className="screen-title">디카페인 카페</h2>
+                <h2 className="screen-title">Cafe</h2>
                 <p className="screen-subtitle">디카페인 커피나 티가 준비되어 있는 카페예요!</p>
             </header>
 

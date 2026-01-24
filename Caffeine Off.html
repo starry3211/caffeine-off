@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:5173/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="./Caffeine Off_files/client"></script>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine Off</title>
+  <style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/index.css">@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root {
+  /* New Color Palette */
+  --primary-midnight-teal: #10353A;
+  --secondary-airy-teal: #E6F2F2;
+  --accent-vital-mint: #00D1B2;
+  --bg-soft-slate: #F8FAFB;
+  --neutral-deep-charcoal: #2C3E50;
+  --alert-sunset-orange: #FF7043;
+
+  /* Mapping legacy variables to new palette for compatibility */
+  --midnight-navy: var(--bg-soft-slate);
+  /* Background is now light */
+  --digital-mint: var(--accent-vital-mint);
+  --glass-blue-primary: var(--primary-midnight-teal);
+  --glass-blue-light: var(--accent-vital-mint);
+
+  /* Text Colors - Adapted for Light Theme */
+  --text-primary: var(--neutral-deep-charcoal);
+  /* Main text is now dark */
+  --text-secondary: rgba(44, 62, 80, 0.7);
+  /* Dark text with opacity */
+  --text-dark: #111111;
+
+  /* Glassmorphism Variables - Adapted for Light Theme */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  /* More opaque white for light bg */
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 8px 32px 0 rgba(16, 53, 58, 0.1);
+  /* Teal tinted shadow */
+  --glass-blur: 16px;
+
+  /* Spacing & Layout */
+  --safe-area-padding: 20px;
+  --bottom-nav-height: 60px;
+}
+
+/* Glass Utility Class */
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  background-color: #E0E5EC;
+  /* Outer background for PC view */
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 430px;
+  /* Mobile width constraint */
+  background-color: var(--secondary-airy-teal);
+  /* #E6F2F2 */
+  background-image:
+    linear-gradient(180deg,
+      var(--secondary-airy-teal) 0%,
+      rgba(255, 255, 255, 0.5) 40%,
+      rgba(0, 209, 178, 0.15) 100%);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+  box-shadow: 0 0 60px rgba(16, 53, 58, 0.1);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Scrollbar hiding for horizontal scroll areas */
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/GlobalNavigation.css">.gnb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px var(--safe-area-padding);
+    background-color: transparent;
+    position: fixed;
+    /* Fixed to stay at top */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    /* Match mobile constraint */
+    z-index: 100;
+    transition: background-color 0.3s, backdrop-filter 0.3s;
+}
+
+.gnb.scrolled {
+    background-color: rgba(248, 250, 251, 0.85);
+    /* Soft Slate semi-transparent */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.gnb-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    /* Optional: Add a subtle gradient or glow to logo if desired, 
+     but request asked for generic text representation first. */
+}
+
+.gnb-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/HeroSection.css">.hero-section {
+    padding: 0 var(--safe-area-padding);
+    margin-top: 0;
+    /* Clear margin */
+    padding-top: 80px;
+    /* Space for fixed header */
+    margin-bottom: 30px;
+}
+
+.hero-wave-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 280px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-wave-bg svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.hero-greeting {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 10;
+    /* Ensure text sits above decorative orbs */
+}
+
+/* Decoration Wrapper to hold blobs relative to card */
+.hero-decoration-wrapper {
+    position: relative;
+    /* Ensure container bounds explicitly if needed, but relative works */
+}
+
+/* Decorative Orbs */
+.hero-orb {
+    position: absolute;
+    /* Removed border-radius/filter since images are pre-styled or handled differently */
+    z-index: 0;
+    /* Behind the card */
+    opacity: 0.9;
+    /* Slightly higher opacity for images */
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.orb-1 {
+    width: 200px;
+    /* Adjusted size for image */
+    height: 200px;
+    top: -80px;
+    left: -40px;
+    animation: float 15s ease-in-out infinite;
+}
+
+.orb-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -30px;
+    right: -40px;
+    animation: float 18s ease-in-out infinite 1s;
+}
+
+.orb-3 {
+    width: 200px;
+    height: 200px;
+    top: -80px;
+    right: -40px;
+    animation: float 20s ease-in-out infinite 2s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.caffeine-status-card {
+    position: relative;
+    /* Stacking context */
+    z-index: 1;
+    /* Above orbs */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.4));
+    /* Light mode glass */
+    backdrop-filter: blur(20px);
+    /* Increased blur for glass effect over blobs */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(16, 53, 58, 0.1);
+    border-radius: 24px;
+    padding: 24px;
+    overflow: visible;
+    /* Allowing the character to pop out */
+    margin-top: 150px;
+    /* Greatly increased space for larger mascot */
+}
+
+.hero-character-mascot {
+    position: absolute;
+    top: -140px;
+    /* Adjusted for larger size */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    /* Even larger size */
+    height: auto;
+    z-index: 10;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    animation: float-centered 3s ease-in-out infinite;
+}
+
+@keyframes float-centered {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-15px);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+}
+
+.caffeine-info-text {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.sc-value {
+    color: var(--digital-mint);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.sc-divider {
+    color: var(--text-secondary);
+}
+
+.sc-max {
+    color: var(--text-primary);
+    opacity: 0.8;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--glass-blue-light);
+    border-radius: 4px;
+    /* Optional animation */
+    transition: width 0.5s ease-out;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(76, 175, 80, 0.15);
+    /* Semi-transparent green */
+    color: #4CAF50;
+    /* Green text */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hero-search-container {
+    position: relative;
+    margin-top: 40px;
+    /* Increased separation */
+    z-index: 2;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.25);
+    /* Glass background */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 24px 20px;
+    /* Inner spacing */
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.hero-search-title {
+    color: #2C3E50;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.card-settings-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    cursor: pointer;
+    z-index: 20;
+    /* Above mascot if overlaps, though mascot is generally centered */
+    transition: background 0.2s;
+}
+
+.card-settings-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--primary-midnight-teal);
+}
+
+.hero-search-input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    border-radius: 20px;
+    border: 1px solid #00D1B2;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(16, 53, 58, 0.05);
+    /* Match global shadow tone */
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.hero-search-input:focus {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 20px rgba(16, 53, 58, 0.1);
+    border-color: #fff;
+}
+
+.hero-search-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.hero-search-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--primary-midnight-teal);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.hero-search-btn:hover {
+    opacity: 1;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+}
+
+.status-message {
+    font-size: 14px;
+    color: var(--text-secondary);
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/CaffeineSettingsSheet.css">.sheet-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.sheet-content {
+    background: #fff;
+    width: 100%;
+    max-width: 430px;
+    /* Mobile width constraint */
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    padding-bottom: 40px;
+    /* Safe area */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sheet-header {
+    margin-bottom: 20px;
+}
+
+.sheet-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.sheet-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.sheet-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 16px;
+    background: #f8fafb;
+    /* Soft slate light */
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.sheet-option.selected {
+    border-color: var(--accent-vital-mint);
+    background: rgba(0, 209, 178, 0.05);
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Hide default radio */
+.sheet-option input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    position: relative;
+    outline: none;
+}
+
+.sheet-option.selected input[type="radio"] {
+    border-color: var(--accent-vital-mint);
+}
+
+.sheet-option.selected input[type="radio"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: var(--accent-vital-mint);
+    border-radius: 50%;
+}
+
+.option-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.option-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.option-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.check-icon {
+    color: var(--accent-vital-mint);
+}
+
+.custom-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0 16px;
+    margin-top: -4px;
+    margin-left: 16px;
+    /* Indent slightly ? or just full width */
+    margin-left: 0;
+}
+
+.custom-input-wrapper:focus-within {
+    border-color: var(--accent-vital-mint);
+}
+
+.custom-input {
+    flex: 1;
+    border: none;
+    padding: 14px 0;
+    font-size: 16px;
+    outline: none;
+    color: var(--text-primary);
+}
+
+.unit-text {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.sheet-submit-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--primary-midnight-teal);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.sheet-submit-btn:hover {
+    opacity: 0.9;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Divider */
+.section-divider {
+    height: 1px;
+    background: #eee;
+    margin: 0 -24px 24px;
+    width: calc(100% + 48px);
+}
+
+/* Sleep Time Section */
+.setting-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+}
+
+.sleep-time-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.ampm-toggle {
+    display: flex;
+    background: #f1f3f5;
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+}
+
+.ampm-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.ampm-btn.active {
+    background: #fff;
+    color: var(--text-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.time-input-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #f8fafb;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    padding: 0 16px;
+    gap: 8px;
+    min-width: 0;
+    /* Prevent flex overflow */
+    box-sizing: border-box;
+    /* Ensure padding included in width */
+}
+
+.time-input-container:focus-within {
+    border-color: var(--accent-vital-mint);
+    background: #fff;
+}
+
+.time-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 12px 0;
+    outline: none;
+    text-align: right;
+    min-width: 0;
+    /* Allow input to shrink if needed */
+}
+
+.time-unit {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    /* Prevent unit wrapping */
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/ServiceToggle.css">.service-toggle-section {
+    padding: 0 var(--safe-area-padding);
+    margin-bottom: 40px;
+}
+
+.toggle-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.3);
+    /* Increased transparency */
+    /* Semi-transparent white */
+    backdrop-filter: blur(15px);
+    /* Increased blur */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 6px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    gap: 8px;
+    /* Added gap to replace divider */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-btn {
+    flex: 1 1 0;
+    /* Equal width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    color: var(--text-secondary);
+    /* This will be dark now */
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.toggle-btn.active {
+    color: #fff;
+    /* Keep text white on active button */
+    background: var(--primary-midnight-teal);
+    box-shadow: 0 4px 12px rgba(16, 53, 58, 0.3);
+    font-weight: 700;
+}
+
+.toggle-title {
+    font-size: 15px;
+    margin-bottom: 0;
+    /* Removed margin for vertical centering */
+    text-align: center;
+}
+
+.toggle-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.toggle-divider {
+    display: none;
+}
+
+/* Sub Toggle Styles */
+.sub-toggle-container {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Spread layout for emphasis */
+    padding: 12px 16px;
+    gap: 10px;
+    animation: fadeIn 0.3s ease-out;
+    background: rgba(255, 255, 255, 0.4);
+    /* Highlighting background */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(16, 53, 58, 0.05);
+}
+
+.sub-toggle-label {
+    font-size: 15px;
+    color: var(--primary-midnight-teal);
+    font-weight: 700;
+}
+
+.sub-toggle-switch {
+    width: 44px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    padding: 0;
+}
+
+.sub-toggle-switch.active {
+    background-color: var(--accent-vital-mint);
+}
+
+.sub-toggle-knob {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sub-toggle-switch.active .sub-toggle-knob {
+    transform: translateX(20px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/QuickCuration.css">.curation-section {
+    padding: 0;
+    /* Remove padding here to let slider handle it */
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    padding: 0 var(--safe-area-padding);
+    /* Title needs padding now */
+    /* Optional: sticky left align if needed, but padding handles it */
+}
+
+/* Slider container - horizontal scroll */
+.curation-slider {
+    display: flex;
+    justify-content: space-between;
+    /* Equal spacing */
+    gap: 12px;
+    overflow-x: visible;
+    /* No scroll needed if fitting */
+    padding: 0 var(--safe-area-padding);
+    /* Symmetric padding */
+    padding-bottom: 12px;
+    /* Space for scrollbar/shadow */
+}
+
+.curation-grid {
+    display: flex;
+    justify-content: space-between;
+    /* Equal spacing */
+    gap: 12px;
+    overflow-x: visible;
+    /* No scroll needed if fitting */
+    padding: 0 var(--safe-area-padding);
+    /* Symmetric padding */
+    padding-bottom: 12px;
+    /* Space for scrollbar/shadow */
+}
+
+.quick-curation-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    min-width: 72px;
+    /* Ensure click area */
+}
+
+.qc-icon-wrapper {
+    width: 115px;
+    /* Maximum size for 3 items (approx 1/3 of screen) */
+    height: 115px;
+    /* Removed background, border, shadow for clean icon look */
+    background: none;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.quick-curation-item:hover .qc-icon-wrapper {
+    transform: translateY(-2px);
+    background: none;
+    /* No background on hover either */
+}
+
+.qc-emoji {
+    font-size: 48px;
+}
+
+.qc-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* scaling slightly down so it fits nicely inside rounded square */
+    transform: scale(0.85);
+}
+
+.qc-label {
+    font-size: 15px;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 500;
+    max-width: 115px;
+    /* match wrapper width */
+    word-break: keep-all;
+    white-space: pre-line;
+    /* Allow \n to break lines */
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/CafeRanking.css">.ranking-section {
+    margin-bottom: 40px;
+}
+
+.ranking-list {
+    padding: 0 var(--safe-area-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    /* Rounded card style */
+    margin-bottom: 0;
+    /* Override generic gap if needed, but flex gap handles it */
+}
+
+/* Thumbnail Styles */
+.item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(0, 209, 178, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    /* Spacing between icon and text */
+}
+
+.brand-logo-placeholder {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent-vital-mint);
+}
+
+.rank-info {
+    flex: 1;
+}
+
+.rank-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.rank-brand {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.location-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    border-radius: 4px;
+}
+
+.rank-menu {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.rank-caffeine {
+    color: var(--digital-mint);
+    font-weight: 500;
+}
+
+.more-link-btn {
+    display: block;
+    width: 100%;
+    margin: 20px 0 0;
+    text-align: center;
+    padding: 10px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.more-link-btn:hover {
+    color: var(--text-primary);
+}
+
+.more-link-btn:active {
+    transform: none;
+    color: var(--text-primary);
+    background: transparent;
+}
+
+/* Controls */
+.ranking-controls {
+    padding: 0 var(--safe-area-padding);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.location-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0;
+}
+
+.location-btn.region {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.location-divider {
+    color: rgba(0, 0, 0, 0.1);
+    font-size: 10px;
+}
+
+.sort-row {
+    display: flex;
+    gap: 8px;
+}
+
+.sort-btn {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    font-weight: 500;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.sort-btn.active {
+    color: var(--text-primary);
+    font-weight: 800;
+    opacity: 1;
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/CommerceSection.css">.commerce-section {
+    margin-bottom: 40px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 0 var(--safe-area-padding);
+}
+
+.product-card {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    padding-bottom: 16px;
+}
+
+/* (A) Caffeine Badge */
+.card-badge-overlay {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+}
+
+.vital-badge {
+    background-color: #00C7A9;
+    /* Vital Mint */
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* (B) Image */
+.product-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    position: relative;
+    /* Essential for overlay positioning */
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.image-description-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px 12px 12px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    pointer-events: none;
+}
+
+.image-description-text {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.3;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* (C) Caffeine Gauge */
+.caffeine-gauge-section {
+    padding: 12px 12px 8px;
+}
+
+.gauge-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.gauge-label.safe {
+    color: #00C7A9;
+}
+
+.gauge-label.mild {
+    color: #FFD233;
+}
+
+.gauge-label.check {
+    color: #FF7B30;
+}
+
+.gauge-max {
+    color: #ccc;
+}
+
+.gauge-track {
+    width: 100%;
+    height: 6px;
+    background-color: #EFF1F3;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.gauge-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.gauge-bar.safe {
+    background-color: #00C7A9;
+}
+
+.gauge-bar.mild {
+    background-color: #FFD233;
+}
+
+.gauge-bar.check {
+    background-color: #FF7B30;
+}
+
+.gauge-message {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+    font-style: italic;
+    line-height: 1.3;
+}
+
+/* (D) Trust Tags */
+.trust-tags {
+    display: flex;
+    gap: 4px;
+    padding: 0 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.trust-tag {
+    font-size: 12px;
+    color: #666;
+    background-color: #f5f5f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* (E) Info Footer */
+.product-info-footer {
+    padding: 0 12px;
+    margin-top: auto;
+}
+
+.product-brand {
+    font-size: 12px;
+    color: #999;
+    margin: 0 0 2px;
+}
+
+.product-name-large {
+    font-size: 14px;
+    color: #333;
+    font-weight: 700;
+    margin: 0 0 8px;
+    line-height: 1.3;
+    word-break: keep-all;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price-large {
+    font-size: 16px;
+    font-weight: 800;
+    color: #333;
+}
+
+.wishlist-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.wishlist-btn:active {
+    transform: scale(0.9);
+}
+
+/* See More Button */
+.see-more-btn {
+    display: block;
+    width: 100%;
+    margin: 24px 0 0;
+    text-align: center;
+    padding: 12px;
+    color: #999;
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.see-more-btn:hover {
+    color: #333;
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/WikiSection.css">.wiki-section {
+    margin-bottom: 120px;
+    /* Increased space for floating nav */
+}
+
+.wiki-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 var(--safe-area-padding);
+}
+
+.wiki-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    width: 100%;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.wiki-item:active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.wiki-title {
+    font-size: 14px;
+    color: var(--text-primary);
+    flex: 1;
+    padding-right: 8px;
+    line-height: 1.4;
+}
+
+.wiki-link {
+    font-size: 12px;
+    color: var(--digital-mint);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/main/BottomNavigation.css">.bottom-nav {
+    position: fixed;
+    bottom: 30px;
+    /* Floating */
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    /* Margins on side */
+    max-width: 390px;
+    /* slightly less than max container */
+    height: 70px;
+    background: rgba(255, 255, 255, 0.4);
+    /* Light glass */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 35px;
+    /* Pill shape */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 10px 40px rgba(16, 53, 58, 0.15);
+    padding-bottom: 0;
+    /* Removing safe area padding from inside the pill */
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    gap: 4px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.nav-item.active {
+    color: #fff;
+    background: var(--accent-vital-mint);
+    /* Mint for active tab */
+    box-shadow: 0 4px 15px rgba(0, 209, 178, 0.4);
+    /* transform: translateY(-5px); Removed to keep inside layout */
+}
+
+/* Hide label for cleaner look like reference, or keep small? 
+   Reference shows active item with distinct background. 
+   Let's keep text but make active item special. */
+.nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.nav-item.active .nav-label {
+    display: none;
+    /* Hide text on active to just show big icon like reference style potentially, 
+                    OR keep it. Reference image hides text mostly or has it below. 
+                    Let's hide label for active to make it cleaner */
+}
+
+.nav-item.active svg {
+    width: 28px;
+    height: 28px;
+}</style><style type="text/css" data-vite-dev-id="/Users/Starry/Desktop/caffeine_off/src/components/submain_cafe/DecafCafeListScreen.css">.decaf-cafe-screen {
+    padding-bottom: 100px;
+    min-height: 100vh;
+    background: transparent;
+    /* Let global gradient show through */
+}
+
+.screen-header {
+    background: transparent;
+    padding: 16px var(--safe-area-padding);
+    padding-top: 70px;
+    /* Adjusted for fixed GlobalNavigation (approx 60px height) */
+    position: relative;
+    z-index: 10;
+}
+
+.screen-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--text-primary);
+}
+
+.screen-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Controls Section */
+.controls-section {
+    padding: 16px var(--safe-area-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Coffee Toggle Wrapper */
+.coffee-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(16, 53, 58, 0.05);
+}
+
+.sub-toggle-label {
+    font-size: 15px;
+    color: var(--primary-midnight-teal);
+    font-weight: 700;
+}
+
+.sub-toggle-switch {
+    width: 44px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    padding: 0;
+}
+
+.sub-toggle-switch.active {
+    background-color: var(--accent-vital-mint);
+}
+
+.sub-toggle-knob {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sub-toggle-switch.active .sub-toggle-knob {
+    transform: translateX(20px);
+}
+
+/* Ranking Controls (Copied & Adapted) */
+.ranking-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.location-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0;
+}
+
+.location-btn.current {
+    /* Style for current location button */
+}
+
+.location-btn.region {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.location-divider {
+    color: rgba(0, 0, 0, 0.1);
+    font-size: 10px;
+}
+
+.sort-row {
+    display: flex;
+    gap: 8px;
+}
+
+.sort-btn {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    font-weight: 500;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.sort-btn.active {
+    color: var(--text-primary);
+    font-weight: 800;
+    opacity: 1;
+}
+
+/* List Styles */
+.cafe-list-container {
+    padding: 0 var(--safe-area-padding) 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cafe-list-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    gap: 16px;
+    box-shadow: var(--glass-shadow);
+}
+
+.item-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(0, 209, 178, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-logo-placeholder {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent-vital-mint);
+}
+
+.item-info {
+    flex: 1;
+}
+
+.rank-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.item-brand {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.location-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    border-radius: 4px;
+}
+
+.item-menu {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.item-caffeine {
+    color: var(--digital-mint);
+    font-weight: 500;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}</style></head>
+  <body>
+    <div id="root"><div class="app-container"><nav class="gnb scrolled"><div class="gnb-logo">Caffeine Off</div><div class="gnb-actions"><button aria-label="Search" class="icon-btn"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color="#10353A" height="24" width="24" xmlns="http://www.w3.org/2000/svg" style="color: rgb(16, 53, 58);"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg></button><button aria-label="My Profile" class="icon-btn"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color="#10353A" height="24" width="24" xmlns="http://www.w3.org/2000/svg" style="color: rgb(16, 53, 58);"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path></svg></button></div></nav><section class="hero-section"><div class="hero-wave-bg"><svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#00D1B2" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg></div><h1 class="hero-greeting">다혜님,<br>커피 <span style="color: rgb(255, 224, 130);">1.5잔</span> 정도는 더 마셔도 돼요 🌿</h1><div class="hero-decoration-wrapper"><img src="./Caffeine Off_files/orb_top_cloud.png" alt="" class="hero-orb orb-1"><img src="./Caffeine Off_files/orb_bottom_cloud.png" alt="" class="hero-orb orb-2"><img src="./Caffeine Off_files/orb_top_cloud.png" alt="" class="hero-orb orb-3"><div class="caffeine-status-card"><button class="card-settings-btn" aria-label="Settings"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M12 16c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zm0-6c1.084 0 2 .916 2 2s-.916 2-2 2-2-.916-2-2 .916-2 2-2z"></path><path d="m2.845 16.136 1 1.73c.531.917 1.809 1.261 2.73.73l.529-.306A8.1 8.1 0 0 0 9 19.402V20c0 1.103.897 2 2 2h2c1.103 0 2-.897 2-2v-.598a8.132 8.132 0 0 0 1.896-1.111l.529.306c.923.53 2.198.188 2.731-.731l.999-1.729a2.001 2.001 0 0 0-.731-2.732l-.505-.292a7.718 7.718 0 0 0 0-2.224l.505-.292a2.002 2.002 0 0 0 .731-2.732l-.999-1.729c-.531-.92-1.808-1.265-2.731-.732l-.529.306A8.1 8.1 0 0 0 15 4.598V4c0-1.103-.897-2-2-2h-2c-1.103 0-2 .897-2 2v.598a8.132 8.132 0 0 0-1.896 1.111l-.529-.306c-.924-.531-2.2-.187-2.731.732l-.999 1.729a2.001 2.001 0 0 0 .731 2.732l.505.292a7.683 7.683 0 0 0 0 2.223l-.505.292a2.003 2.003 0 0 0-.731 2.733zm3.326-2.758A5.703 5.703 0 0 1 6 12c0-.462.058-.926.17-1.378a.999.999 0 0 0-.47-1.108l-1.123-.65.998-1.729 1.145.662a.997.997 0 0 0 1.188-.142 6.071 6.071 0 0 1 2.384-1.399A1 1 0 0 0 11 5.3V4h2v1.3a1 1 0 0 0 .708.956 6.083 6.083 0 0 1 2.384 1.399.999.999 0 0 0 1.188.142l1.144-.661 1 1.729-1.124.649a1 1 0 0 0-.47 1.108c.112.452.17.916.17 1.378 0 .461-.058.925-.171 1.378a1 1 0 0 0 .471 1.108l1.123.649-.998 1.729-1.145-.661a.996.996 0 0 0-1.188.142 6.071 6.071 0 0 1-2.384 1.399A1 1 0 0 0 13 18.7l.002 1.3H11v-1.3a1 1 0 0 0-.708-.956 6.083 6.083 0 0 1-2.384-1.399.992.992 0 0 0-1.188-.141l-1.144.662-1-1.729 1.124-.651a1 1 0 0 0 .471-1.108z"></path></svg></button><img src="./Caffeine Off_files/cloud_character.png" alt="Caffeine Off Mascot" class="hero-character-mascot"><p class="caffeine-info-text">오늘 섭취한 카페인은 지금까지 <br><span class="sc-value">45mg</span><span class="sc-divider"> / </span><span class="sc-max">300mg</span> 이에요</p><div class="progress-bar-container"><div class="progress-bar-fill" style="width: 15%;"></div></div><div class="status-indicator"><div class="status-badge"><span class="status-dot"></span>안심</div><span class="status-message">잠드는 시간까지 8시간 남았어요!</span></div></div><div class="hero-search-container"><h3 class="hero-search-title">원하는 카페나 제품을 검색해 보세요</h3><div class="search-input-wrapper"><input type="text" class="hero-search-input" placeholder="연남동에 산미 적은 디카페인 커피 카페 찾아줘" aria-label="Ask AI about caffeine-free options"><button class="hero-search-btn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button></div></div></div></section><section class="curation-section"><h2 class="section-title">Product Category</h2><div class="curation-grid"><button class="quick-curation-item"><div class="qc-icon-wrapper"><img src="./Caffeine Off_files/quick_decaf.png" alt="딥나잇
+디카페인" class="qc-icon-image"></div><span class="qc-label">딥나잇
+디카페인</span></button><button class="quick-curation-item"><div class="qc-icon-wrapper"><img src="./Caffeine Off_files/quick_energy.png" alt="가벼운
+Low 카페인" class="qc-icon-image"></div><span class="qc-label">가벼운
+Low 카페인</span></button><button class="quick-curation-item"><div class="qc-icon-wrapper"><img src="./Caffeine Off_files/quick_tea.png" alt="편안하게
+릴렉스 티" class="qc-icon-image"></div><span class="qc-label">편안하게
+릴렉스 티</span></button></div></section><section class="service-toggle-section"><div class="toggle-container"><button class="toggle-btn "><span class="toggle-title">지금 밖에서</span></button><button class="toggle-btn active"><span class="toggle-title">집/사무실에서</span></button></div></section><section class="commerce-section"><h2 class="section-title" style="padding-left: var(--safe-area-padding);">Weekly Best Picks</h2><div class="product-grid"><div class="product-card"><div class="card-badge-overlay"><span class="vital-badge">4mg</span></div><div class="product-image-container"><img src="./Caffeine Off_files/decaf_capsule.png" alt="디카페인 캡슐" class="product-image"><div class="image-description-overlay"><p class="image-description-text">마셔도 숙면할 수 있어요</p></div></div><div class="caffeine-gauge-section"><div class="gauge-header"><span class="gauge-label safe">Safe</span><span class="gauge-max">Caution</span></div><div class="gauge-track"><div class="gauge-bar safe" style="width: 16%;"></div></div></div><div class="trust-tags"><span class="trust-tag">SWP 공법</span><span class="trust-tag">임산부 안심</span></div><div class="product-info-footer"><p class="product-brand">카누</p><h3 class="product-name-large">디카페인 캡슐</h3><div class="price-row"><span class="product-price-large">15,900원</span><button class="wishlist-btn" aria-label="Add to wishlist"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.28 5.4 15.36 10.55 20.04L12 21.35L13.45 20.03C18.6 15.36 22 12.28 22 8.5C22 5.41 19.58 3 16.5 3ZM12.1 18.55L12 18.65L11.9 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 5.99 11.07 7.36H12.94C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55Z" fill="#999999"></path></svg></button></div></div></div><div class="product-card"><div class="card-badge-overlay"><span class="vital-badge">0mg</span></div><div class="product-image-container"><img src="./Caffeine Off_files/rooibos_tea.png" alt="루이보스 티백 세트" class="product-image"><div class="image-description-overlay"><p class="image-description-text">카페인 없이 향긋한 향을 즐겨요</p></div></div><div class="caffeine-gauge-section"><div class="gauge-header"><span class="gauge-label safe">Safe</span><span class="gauge-max">Caution</span></div><div class="gauge-track"><div class="gauge-bar safe" style="width: 5%;"></div></div></div><div class="trust-tags"><span class="trust-tag">무카페인</span><span class="trust-tag">유기농</span></div><div class="product-info-footer"><p class="product-brand">오설록</p><h3 class="product-name-large">루이보스 티백 세트</h3><div class="price-row"><span class="product-price-large">12,000원</span><button class="wishlist-btn" aria-label="Remove from wishlist"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5C22 12.27 18.6 15.36 13.45 20.03L12 21.35Z" fill="#FF4B4B"></path></svg></button></div></div></div><div class="product-card"><div class="card-badge-overlay"><span class="vital-badge">12mg</span></div><div class="product-image-container"><img src="./Caffeine Off_files/decaf_capsule.png" alt="디카페인 블렌드" class="product-image"><div class="image-description-overlay"><p class="image-description-text">민감하신 분은 샷 조절을 권장해요</p></div></div><div class="caffeine-gauge-section"><div class="gauge-header"><span class="gauge-label mild">Mild</span><span class="gauge-max">Caution</span></div><div class="gauge-track"><div class="gauge-bar mild" style="width: 31.2%;"></div></div></div><div class="trust-tags"><span class="trust-tag">마일드</span><span class="trust-tag">로스팅</span></div><div class="product-info-footer"><p class="product-brand">일리</p><h3 class="product-name-large">디카페인 블렌드</h3><div class="price-row"><span class="product-price-large">18,500원</span><button class="wishlist-btn" aria-label="Add to wishlist"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.28 5.4 15.36 10.55 20.04L12 21.35L13.45 20.03C18.6 15.36 22 12.28 22 8.5C22 5.41 19.58 3 16.5 3ZM12.1 18.55L12 18.65L11.9 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 5.99 11.07 7.36H12.94C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55Z" fill="#999999"></path></svg></button></div></div></div><div class="product-card"><div class="card-badge-overlay"><span class="vital-badge">0mg</span></div><div class="product-image-container"><img src="./Caffeine Off_files/rooibos_tea.png" alt="유기농 캐모마일 티" class="product-image"><div class="image-description-overlay"><p class="image-description-text">따뜻하게 긴장을 풀어줄거예요</p></div></div><div class="caffeine-gauge-section"><div class="gauge-header"><span class="gauge-label safe">Safe</span><span class="gauge-max">Caution</span></div><div class="gauge-track"><div class="gauge-bar safe" style="width: 5%;"></div></div></div><div class="trust-tags"><span class="trust-tag">심신안정</span><span class="trust-tag">허브 100%</span></div><div class="product-info-footer"><p class="product-brand">트와이닝</p><h3 class="product-name-large">유기농 캐모마일 티</h3><div class="price-row"><span class="product-price-large">9,800원</span><button class="wishlist-btn" aria-label="Add to wishlist"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.28 5.4 15.36 10.55 20.04L12 21.35L13.45 20.03C18.6 15.36 22 12.28 22 8.5C22 5.41 19.58 3 16.5 3ZM12.1 18.55L12 18.65L11.9 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 5.99 11.07 7.36H12.94C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55Z" fill="#999999"></path></svg></button></div></div></div></div><button class="see-more-btn">더 많은 제품보기</button></section><section class="wiki-section"><h2 class="section-title" style="padding-left: var(--safe-area-padding);">카페인 위키</h2><div class="wiki-list"><button class="wiki-item"><span class="wiki-title">디카페인 커피는 정말 카페인이 0일까?</span><span class="wiki-link">자세히 보기 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg></span></button><button class="wiki-item"><span class="wiki-title">카페인 분해를 돕는 의외의 음식 3가지</span><span class="wiki-link">자세히 보기 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg></span></button></div></section><nav class="bottom-nav"><button class="nav-item active"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 22h14a2 2 0 0 0 2-2v-9a1 1 0 0 0-.29-.71l-8-8a1 1 0 0 0-1.41 0l-8 8A1 1 0 0 0 3 11v9a2 2 0 0 0 2 2zm5-2v-5h4v5zm-5-8.59 7-7 7 7V20h-3v-5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v5H5z"></path></svg><span class="nav-label">홈</span></button><button class="nav-item "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 2h2v3H5zm4 0h2v3H9zm4 0h2v3h-2zm6 7h-2V7H3v11c0 1.654 1.346 3 3 3h8c1.654 0 3-1.346 3-3h2c1.103 0 2-.897 2-2v-5c0-1.103-.897-2-2-2zm-4 9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V9h10v9zm2-2v-5h2l.002 5H17z"></path></svg><span class="nav-label">카페</span></button><button class="nav-item "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 22h14c1.103 0 2-.897 2-2V9a1 1 0 0 0-1-1h-3V7c0-2.757-2.243-5-5-5S7 4.243 7 7v1H4a1 1 0 0 0-1 1v11c0 1.103.897 2 2 2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-4 3h2v2h2v-2h6v2h2v-2h2l.002 10H5V10z"></path></svg><span class="nav-label">쇼핑</span></button><button class="nav-item "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M9 6h2v14H9zm4 2h2v12h-2zm4-4h2v16h-2zM5 12h2v8H5z"></path></svg><span class="nav-label">로그</span></button><button class="nav-item "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><circle cx="9.5" cy="9.5" r="1.5"></circle><circle cx="14.5" cy="9.5" r="1.5"></circle><path d="M12 2C6.486 2 2 5.589 2 10c0 2.908 1.897 5.515 5 6.934V22l5.34-4.004C17.697 17.852 22 14.32 22 10c0-4.411-4.486-8-10-8zm0 14h-.333L9 18v-2.417l-.641-.247C5.671 14.301 4 12.256 4 10c0-3.309 3.589-6 8-6s8 2.691 8 6-3.589 6-8 6z"></path></svg><span class="nav-label">커뮤</span></button></nav></div></div>
+    <script type="module" src="./Caffeine Off_files/main.tsx"></script>
+  
+
+</body></html>
