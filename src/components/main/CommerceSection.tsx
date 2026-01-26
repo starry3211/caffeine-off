@@ -66,9 +66,10 @@ export const PRODUCTS: Product[] = [
 
 interface CommerceSectionProps {
     onNavigateToShop?: () => void;
+    onProductClick?: (product: Product) => void;
 }
 
-const CommerceSection: React.FC<CommerceSectionProps> = ({ onNavigateToShop }) => {
+const CommerceSection: React.FC<CommerceSectionProps> = ({ onNavigateToShop, onProductClick }) => {
     const [products, setProducts] = React.useState<Product[]>(PRODUCTS);
 
     const toggleHeart = (id: number) => {
@@ -87,7 +88,7 @@ const CommerceSection: React.FC<CommerceSectionProps> = ({ onNavigateToShop }) =
 
             <div className="product-grid">
                 {products.map((product) => (
-                    <CommonProductCard key={product.id} product={product} toggleHeart={toggleHeart} />
+                    <CommonProductCard key={product.id} product={product} toggleHeart={toggleHeart} onClick={onProductClick} />
                 ))}
             </div>
 

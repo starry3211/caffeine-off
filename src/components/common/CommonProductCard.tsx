@@ -11,9 +11,10 @@ export const getGaugeStatus = (amount: number) => {
 interface CommonProductCardProps {
     product: Product;
     toggleHeart: (id: number) => void;
+    onClick?: (product: Product) => void;
 }
 
-const CommonProductCard: React.FC<CommonProductCardProps> = ({ product, toggleHeart }) => {
+const CommonProductCard: React.FC<CommonProductCardProps> = ({ product, toggleHeart, onClick }) => {
     const status = getGaugeStatus(product.caffeineAmount);
 
     let widthPercent = 10;
@@ -26,7 +27,7 @@ const CommonProductCard: React.FC<CommonProductCardProps> = ({ product, toggleHe
     }
 
     return (
-        <div className="product-card">
+        <div className="product-card" onClick={() => onClick && onClick(product)} style={{ cursor: onClick ? 'pointer' : 'default' }}>
             {/* (A) Vital Mint Badge */}
             <div className="card-badge-overlay">
                 <span className="vital-badge">{product.caffeineAmount}mg</span>
@@ -70,7 +71,10 @@ const CommonProductCard: React.FC<CommonProductCardProps> = ({ product, toggleHe
                     <button
                         className="wishlist-btn"
                         aria-label={product.isHearted ? "Remove from wishlist" : "Add to wishlist"}
-                        onClick={() => toggleHeart(product.id)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            toggleHeart(product.id);
+                        }}
                     >
                         {product.isHearted ? (
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

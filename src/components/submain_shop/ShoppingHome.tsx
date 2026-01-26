@@ -21,7 +21,7 @@ const FILTER_DATA = {
 
 const SORT_OPTIONS = ["카페인 낮은순", "인기순", "가격 낮은순", "신상품순"];
 
-const ShoppingHome: React.FC<{ initialTab?: string }> = ({ initialTab }) => {
+const ShoppingHome: React.FC<{ initialTab?: string; onProductClick?: (product: Product) => void }> = ({ initialTab, onProductClick }) => {
     // Local state for products
     const [products, setProducts] = useState<Product[]>(PRODUCTS);
     const [activeTab, setActiveTab] = useState(initialTab || '🌙 디카페인');
@@ -255,7 +255,7 @@ const ShoppingHome: React.FC<{ initialTab?: string }> = ({ initialTab }) => {
 
                 <div className="product-grid">
                     {filteredProducts.map((product) => (
-                        <CommonProductCard key={product.id} product={product} toggleHeart={toggleHeart} />
+                        <CommonProductCard key={product.id} product={product} toggleHeart={toggleHeart} onClick={onProductClick} />
                     ))}
                 </div>
             </section>
