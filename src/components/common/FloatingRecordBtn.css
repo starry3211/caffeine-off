@@ -1,0 +1,78 @@
+/* Floating Btn Styles v3 - Robust Flex Layout */
+.floating-btn-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    height: 0;
+    overflow: visible;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.floating-record-btn {
+    position: absolute;
+    bottom: 110px;
+    right: 20px;
+    height: 56px;
+    background-color: #10353A;
+    color: #fff;
+    border: none;
+    border-radius: 28px;
+    box-shadow: 0 4px 12px rgba(16, 53, 58, 0.3);
+    cursor: pointer;
+    overflow: hidden;
+    transition: width 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+    pointer-events: auto;
+
+    /* Layout Logic */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Always left-align, rely on icon width for spacing */
+    padding: 0;
+    /* Reset padding, icon handles it */
+
+    /* Collapsed width */
+    width: 56px;
+}
+
+.floating-record-btn.expanded {
+    width: 215px;
+}
+
+.floating-record-btn .btn-icon {
+    /* Critical: Fixed width container ensures centering in collapsed state */
+    min-width: 56px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-record-btn .btn-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding-right: 24px;
+    /* Right padding for visual balance */
+}
+
+.floating-record-btn.expanded .btn-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.floating-record-btn:hover {
+    transform: scale(1.05);
+}
+
+.floating-record-btn:active {
+    transform: scale(0.95);
+}

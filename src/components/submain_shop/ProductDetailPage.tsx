@@ -77,7 +77,17 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onBack, 
                 </div>
             </section>
 
-            {/* [Section 3: Caffeine Analysis Report] */}
+            {/* [Section 3: Caffeine Off Massage] */}
+            <section className="massage-section">
+                <h3 className="massage-title">Caffeine Off Massage</h3>
+                <p className="massage-content">
+                    "12시간 동안 천천히 내려진 이 디카페인 콜드브루는 향의 깊이가 다릅니다.<br />
+                    얼음 컵에 붓기만 하세요.<br />
+                    제가 직접 마셔보고 '이건 위스키 같다'고 감탄했던 바로 그 향입니다."
+                </p>
+            </section>
+
+            {/* [Section 4: Caffeine Analysis Report] */}
             <section className="detail-section">
                 <h3 className="analysis-title">Caffeine Analysis</h3>
 
@@ -99,12 +109,6 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onBack, 
                         {Math.round((product.caffeineAmount / 150) * 100)}% ({product.caffeineAmount}mg)
                     </div>
                 </div>
-
-                <div className="analysis-quote">
-                    <p><strong>"잠들기 3시간 전에도 괜찮아요."</strong></p>
-                    <p>"두근거림 걱정 없이 부드러운 여유를 즐기세요."</p>
-                </div>
-
                 <p className="comparison-guide">*비교 가이드: 일반 아메리카노(150mg)의 약 1/{Math.round(150 / Math.max(1, product.caffeineAmount))} 수준!</p>
             </section>
 
@@ -128,7 +132,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onBack, 
 
             {/* [Section 5: Review] */}
             <section className="detail-section">
-                <h3 className="analysis-title">안심 리뷰</h3>
+                <h3 className="analysis-title">Reviews</h3>
                 {extendedData.reviews.map((review, idx) => (
                     <div className="review-item" key={idx}>
                         <p className="review-text">"{review.text}"</p>

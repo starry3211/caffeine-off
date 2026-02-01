@@ -135,7 +135,42 @@
     color: #FF4B4B;
 }
 
-/* Section 3: Caffeine Analysis */
+/* Section 3: Caffeine Off Massage */
+
+@font-face {
+    font-family: 'Mongdol';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Mongdol.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.massage-section {
+    padding: 40px 24px;
+    background-color: #F8FAFB;
+    /* Using --bg-soft-slate color */
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.massage-title {
+    font-family: 'Mongdol', cursive;
+    font-size: 22px;
+    font-weight: 700;
+    color: #10353A;
+    /* Using --primary-midnight-teal */
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+}
+
+.massage-content {
+    font-family: 'Mongdol', cursive;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #2C3E50;
+    word-break: keep-all;
+}
+
+/* Section 3.1: Caffeine Analysis */
 .analysis-title {
     font-size: 18px;
     font-weight: 700;

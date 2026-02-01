@@ -11,6 +11,10 @@ import DecafCafeListScreen from './components/submain_cafe/DecafCafeListScreen';
 import ShoppingHome from './components/submain_shop/ShoppingHome';
 import ProductDetailPage from './components/submain_shop/ProductDetailPage';
 import { Product } from './components/main/CommerceSection';
+import FloatingRecordBtn from './components/common/FloatingRecordBtn';
+import CaffeineLogScreen, { CaffeineRecord } from './components/submain_log/CaffeineLogScreen';
+import CaffeineRecordPopup from './components/popup/CaffeineRecordPopup';
+import EditRecordModal from './components/popup/EditRecordModal';
 import './index.css';
 
 function App() {
@@ -18,6 +22,9 @@ function App() {
     const [currentTab, setCurrentTab] = useState('home');
     const [shopInitialTab, setShopInitialTab] = useState('🌙 디카페인');
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [isRecordPopupOpen, setIsRecordPopupOpen] = useState(false);
+    const [caffeineRecords, setCaffeineRecords] = useState<CaffeineRecord[]>([]);
+    const [editingRecord, setEditingRecord] = useState<CaffeineRecord | null>(null);
 
     const [isCoffeeOnly, setIsCoffeeOnly] = useState(false);
 
@@ -36,9 +43,47 @@ function App() {
         setCurrentTab('product-detail');
     };
 
+    const handleRecordComplete = (data: any) => {
+        // Create new record
+        const newRecord: CaffeineRecord = {
+            id: Date.now().toString(),
+            brand: data.brand || 'Unknown',
+            menu: data.menu || 'Unknown Menu',
+            size: data.size || 'Standard',
+            caffeine: data.caffeine || 0, // Ensure popup passes this or calculate it
+            date: data.date || new Date(),
+            isDecaf: data.isDecaf || false
+        };
+
+        setCaffeineRecords(prev => [newRecord, ...prev]);
+        setIsRecordPopupOpen(false);
+    };
+
+    const handleDeleteRecord = (id: string) => {
+        setCaffeineRecords(prev => prev.filter(r => r.id !== id));
+    };
+
+    // Update record after editing
+    const handleSaveEdit = (id: string, newDate: Date, newCaffeine: number) => {
+        setCaffeineRecords(prev => prev.map(r =>
+            r.id === id ? { ...r, date: newDate, caffeine: newCaffeine } : r
+        ));
+        setEditingRecord(null);
+    };
+
     const renderContent = () => {
         if (currentTab === 'cafe') {
             return <DecafCafeListScreen />;
+        }
+
+        if (currentTab === 'log') {
+            return (
+                <CaffeineLogScreen
+                    records={caffeineRecords}
+                    onDelete={handleDeleteRecord}
+                    onEdit={setEditingRecord}
+                />
+            );
         }
 
         if (currentTab === 'product-detail' && selectedProduct) {
@@ -46,18 +91,14 @@ function App() {
                 <ProductDetailPage
                     product={selectedProduct}
                     onBack={() => {
-                        // Logic: go back to previous context (shop or home)
-                        // If we have previousTab state, use it.
-                        // But wait, the user might want "Back" to just go back to list.
-                        // And "Home" to go to Home tab.
                         setCurrentTab(previousTab);
                         setSelectedProduct(null);
                     }}
                     onGoHome={() => {
                         setCurrentTab('home');
                         setSelectedProduct(null);
-                        setShopInitialTab('🌙 디카페인'); // Optional: reset shop tab? Maybe not.
-                        setActiveMode('home'); // Ensure mode is Home?
+                        setShopInitialTab('🌙 디카페인');
+                        setActiveMode('home');
                     }}
                 />
             );
@@ -105,7 +146,27 @@ function App() {
         <div className="app-container">
             {renderContent()}
             {currentTab !== 'product-detail' && (
-                <BottomNavigation activeTab={currentTab} onTabChange={setCurrentTab} />
+                <>
+                    <FloatingRecordBtn onClick={() => setIsRecordPopupOpen(true)} />
+                    <BottomNavigation activeTab={currentTab} onTabChange={setCurrentTab} />
+                </>
+            )}
+
+            {/* Global Popup Layer */}
+            {isRecordPopupOpen && (
+                <CaffeineRecordPopup
+                    onClose={() => setIsRecordPopupOpen(false)}
+                    onComplete={handleRecordComplete}
+                />
+            )}
+
+            {/* Edit Modal Layer */}
+            {editingRecord && (
+                <EditRecordModal
+                    record={editingRecord}
+                    onClose={() => setEditingRecord(null)}
+                    onSave={handleSaveEdit}
+                />
             )}
         </div>
     );
