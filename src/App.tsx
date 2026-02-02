@@ -28,6 +28,20 @@ function App() {
 
     const [isCoffeeOnly, setIsCoffeeOnly] = useState(false);
 
+    // Shared State for Caffeine Status
+    const [maxIntake, setMaxIntake] = useState(300);
+
+    // Calculate Today's Caffeine Intake
+    const todayCaffeineIntake = caffeineRecords
+        .filter(record => {
+            const d = new Date(record.date);
+            const now = new Date();
+            return d.getFullYear() === now.getFullYear() &&
+                d.getMonth() === now.getMonth() &&
+                d.getDate() === now.getDate();
+        })
+        .reduce((sum, record) => sum + record.caffeine, 0);
+
     const handleNavigateToShop = (tabName?: string) => {
         if (tabName) setShopInitialTab(tabName);
         setCurrentTab('shop');
@@ -82,6 +96,7 @@ function App() {
                     records={caffeineRecords}
                     onDelete={handleDeleteRecord}
                     onEdit={setEditingRecord}
+                    maxIntake={maxIntake}
                 />
             );
         }
@@ -117,7 +132,11 @@ function App() {
         return (
             <>
                 <GlobalNavigation />
-                <HeroSection />
+                <HeroSection
+                    currentIntake={todayCaffeineIntake}
+                    maxIntake={maxIntake}
+                    setMaxIntake={setMaxIntake}
+                />
                 <QuickCuration onNavigateToShop={handleNavigateToShop} />
                 <ServiceToggle
                     activeMode={activeMode}
@@ -127,7 +146,7 @@ function App() {
                 />
 
                 {/* Show CafeRanking only in 'cafe' mode (inside Home Tab toggles) */}
-                {activeMode === 'cafe' && <CafeRanking />}
+                {activeMode === 'cafe' && <CafeRanking onMoreClick={() => setCurrentTab('cafe')} />}
 
                 {/* Show CommerceSection only in 'home' mode (inside Home Tab toggles) */}
                 {activeMode === 'home' && (

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import './CafeRanking.css';
 import { BiTargetLock, BiChevronDown } from 'react-icons/bi';
 
-const CafeRanking: React.FC = () => {
+interface CafeRankingProps {
+    onMoreClick?: () => void;
+}
+
+const CafeRanking: React.FC<CafeRankingProps> = ({ onMoreClick }) => {
     const [sortMode, setSortMode] = useState<'popular' | 'distance'>('popular');
 
     const rankings = [
@@ -64,7 +68,7 @@ const CafeRanking: React.FC = () => {
                 ))}
             </ul>
 
-            <button className="more-link-btn">
+            <button className="more-link-btn" onClick={onMoreClick}>
                 더 많은 카페 보기
             </button>
         </section>

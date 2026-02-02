@@ -1,39 +1,36 @@
-import React from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import './HeroSection.css';
 import orbTopOrange from '../../assets/images/orb_top_cloud.png';
 import orbBottomGreen from '../../assets/images/orb_bottom_cloud.png';
-import cloudCharacterImg from '../../assets/images/cloud_character.png';
-
-import { BiCog } from 'react-icons/bi';
-
+import CaffeineStatusCard from '../common/CaffeineStatusCard';
 import CaffeineSettingsSheet from './CaffeineSettingsSheet';
 
-const HeroSection: React.FC = () => {
-    // State
-    const [currentIntake] = React.useState(45); // Mock current
-    const [maxIntake, setMaxIntake] = React.useState(300);
+interface HeroSectionProps {
+    currentIntake: number;
+    maxIntake: number;
+    setMaxIntake: (val: number) => void;
+}
 
+const HeroSection: React.FC<HeroSectionProps> = ({ currentIntake, maxIntake, setMaxIntake }) => {
     // Settings Sheet State
-    const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
-
-    const progressPercentage = Math.min((currentIntake / maxIntake) * 100, 100);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     const handleSaveSettings = (newMax: number) => {
         setMaxIntake(newMax);
     };
 
     // Typing effect logic
-    const [placeholder, setPlaceholder] = React.useState('');
-    const [isDeleting, setIsDeleting] = React.useState(false);
-    const [loopNum, setLoopNum] = React.useState(0);
-    const [typingSpeed, setTypingSpeed] = React.useState(100);
+    const [placeholder, setPlaceholder] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [loopNum, setLoopNum] = useState(0);
+    const [typingSpeed, setTypingSpeed] = useState(100);
 
-    const phrases = React.useMemo(() => [
+    const phrases = useMemo(() => [
         "집에서 혼자 밤에 힐링할 수 있는 티를 추천해줘",
         "연남동에 산미 적은 디카페인 커피 카페 찾아줘"
     ], []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const handleTyping = () => {
             const i = loopNum % phrases.length;
             const fullText = phrases[i];
@@ -71,37 +68,11 @@ const HeroSection: React.FC = () => {
                 <img src={orbBottomGreen} alt="" className="hero-orb orb-2" />
                 <img src={orbTopOrange} alt="" className="hero-orb orb-3" />
 
-                <div className="caffeine-status-card">
-                    <button
-                        className="card-settings-btn"
-                        aria-label="Settings"
-                        onClick={() => setIsSettingsOpen(true)}
-                    >
-                        <BiCog size={20} />
-                    </button>
-                    <img src={cloudCharacterImg} alt="Caffeine Off Mascot" className="hero-character-mascot" />
-                    <p className="caffeine-info-text">
-                        오늘 섭취한 카페인은 지금까지 <br />
-                        <span className="sc-value">{currentIntake}mg</span>
-                        <span className="sc-divider"> / </span>
-                        <span className="sc-max">{maxIntake}mg</span> 이에요
-                    </p>
-
-                    <div className="progress-bar-container">
-                        <div
-                            className="progress-bar-fill"
-                            style={{ width: `${progressPercentage}%` }}
-                        ></div>
-                    </div>
-
-                    <div className="status-indicator">
-                        <div className="status-badge">
-                            <span className="status-dot"></span>
-                            안심
-                        </div>
-                        <span className="status-message">잠드는 시간까지 8시간 남았어요!</span>
-                    </div>
-                </div>
+                <CaffeineStatusCard
+                    currentIntake={currentIntake}
+                    maxIntake={maxIntake}
+                    onSettingsClick={() => setIsSettingsOpen(true)}
+                />
 
                 <div className="hero-search-container">
                     <h3 className="hero-search-title">원하는 카페나 제품을 검색해 보세요</h3>

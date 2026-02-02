@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { IoChevronBack, IoChevronForward, IoPencil, IoTrashOutline } from 'react-icons/io5';
 import './CaffeineLogScreen.css';
+import DeleteConfirmModal from '../popup/DeleteConfirmModal';
+import CaffeineStatusCard from '../common/CaffeineStatusCard';
 
 export interface CaffeineRecord {
     id: string;
@@ -16,10 +18,12 @@ interface CaffeineLogScreenProps {
     records: CaffeineRecord[];
     onDelete: (id: string) => void;
     onEdit: (record: CaffeineRecord) => void;
+    maxIntake?: number;
 }
 
-const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete, onEdit }) => {
+const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete, onEdit, maxIntake = 400 }) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
     // Helper to format date: "2024년 5월 22일 (수)"
     const formatDate = (date: Date) => {
@@ -47,14 +51,21 @@ const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete
 
     // Calculate metrics
     const totalCaffeine = dailyRecords.reduce((sum, r) => sum + r.caffeine, 0);
-    const maxCaffeine = 400; // Daily recommended limit
-    const progressPercent = Math.min((totalCaffeine / maxCaffeine) * 100, 100);
+    // const maxCaffeine = 400; // Daily recommended limit - Replaced by prop
+    // const progressPercent = Math.min((totalCaffeine / maxCaffeine) * 100, 100); - Handled by Card
 
     // Date Navigation
     const changeDate = (days: number) => {
         const newDate = new Date(selectedDate);
         newDate.setDate(selectedDate.getDate() + days);
         setSelectedDate(newDate);
+    };
+
+    const handleDeleteConfirm = () => {
+        if (deleteTargetId) {
+            onDelete(deleteTargetId);
+            setDeleteTargetId(null);
+        }
     };
 
     return (
@@ -73,6 +84,13 @@ const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete
             </header>
 
             {/* Section 1: Summary Dashboard */}
+            <CaffeineStatusCard
+                currentIntake={totalCaffeine}
+                maxIntake={maxIntake}
+                showSettingsBtn={false}
+                className="log-summary-card"
+            />
+            {/* 
             <section className="summary-card">
                 <div className="summary-title">오늘의 총 카페인 섭취량</div>
                 <div className="caffeine-score">
@@ -94,7 +112,8 @@ const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete
                         : "오늘 수면 시간(11PM)까지 안전해요! 😊"
                     }
                 </div>
-            </section>
+            </section> 
+            */}
 
             {/* Section 2: Timeline History */}
             <section className="timeline-section">
@@ -126,9 +145,7 @@ const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete
                                 <button className="action-btn" onClick={() => onEdit(record)}>
                                     <IoPencil size={16} color="#888" />
                                 </button>
-                                <button className="action-btn" onClick={() => {
-                                    if (window.confirm('정말 삭제하시겠습니까?')) onDelete(record.id);
-                                }}>
+                                <button className="action-btn" onClick={() => setDeleteTargetId(record.id)}>
                                     <IoTrashOutline size={16} color="#FF5C5C" />
                                 </button>
                             </div>
@@ -136,6 +153,14 @@ const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete
                     ))
                 )}
             </section>
+
+            {/* Delete Confirmation Modal */}
+            {deleteTargetId && (
+                <DeleteConfirmModal
+                    onClose={() => setDeleteTargetId(null)}
+                    onConfirm={handleDeleteConfirm}
+                />
+            )}
         </div>
     );
 };
