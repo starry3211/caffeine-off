@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoChevronBack, IoShareSocialOutline, IoAlertCircleOutline, IoHeartCircle, IoHandRight, IoThumbsUp } from 'react-icons/io5';
+import { IoChevronBack, IoShareSocialOutline, IoAlertCircleOutline } from 'react-icons/io5';
 import './CommunityPostDetail.css';
 
 interface Post {
