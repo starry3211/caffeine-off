@@ -47,7 +47,8 @@ const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete
     const dailyRecords = records.filter(r => isSameDay(r.date, selectedDate));
 
     // Sort by time descending (latest first)
-    dailyRecords.sort((a, b) => b.date.getTime() - a.date.getTime());
+    // Sort by time descending (latest first)
+    dailyRecords.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     // Calculate metrics
     const totalCaffeine = dailyRecords.reduce((sum, r) => sum + r.caffeine, 0);
@@ -119,34 +120,38 @@ const CaffeineLogScreen: React.FC<CaffeineLogScreenProps> = ({ records, onDelete
             <section className="timeline-section">
                 {dailyRecords.length === 0 ? (
                     <div className="empty-day-state">
-                        <p>기록된 카페인 섭취가 없습니다.</p>
+                        <p>아직까지 섭취한 카페인이 없어요!</p>
                     </div>
                 ) : (
                     dailyRecords.map(record => (
                         <div key={record.id} className="timeline-item">
-                            <div className="time-badge">
-                                {record.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
+                            <div className="timeline-time-col">
+                                <span className="time-badge">
+                                    {record.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
+                                </span>
                             </div>
+
                             <div className="timeline-content">
                                 <div className="timeline-brand">{record.brand}</div>
                                 <div className="timeline-menu">
                                     {record.menu} {record.isDecaf && '🌙'}
                                 </div>
-                                <div className="timeline-desc">
-                                    {record.size}
+                                <div className="timeline-meta">
+                                    <span className="meta-size">{record.size}</span>
+                                    <span className="meta-divider">·</span>
+                                    <span className={`meta-caffeine-badge ${record.caffeine > 100 ? 'high' : 'safe'}`}>
+                                        {record.caffeine}mg
+                                    </span>
                                 </div>
-                            </div>
-                            <div className="timeline-caffeine">
-                                {record.caffeine}mg
                             </div>
 
                             {/* Edit/Delete Actions */}
                             <div className="timeline-actions">
                                 <button className="action-btn" onClick={() => onEdit(record)}>
-                                    <IoPencil size={16} color="#888" />
+                                    <IoPencil size={18} color="#888" />
                                 </button>
                                 <button className="action-btn" onClick={() => setDeleteTargetId(record.id)}>
-                                    <IoTrashOutline size={16} color="#FF5C5C" />
+                                    <IoTrashOutline size={18} color="#FF5C5C" />
                                 </button>
                             </div>
                         </div>

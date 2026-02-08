@@ -8,13 +8,13 @@ import CommerceSection from './components/main/CommerceSection';
 import WikiSection from './components/main/WikiSection';
 import BottomNavigation from './components/main/BottomNavigation';
 import DecafCafeListScreen from './components/submain_cafe/DecafCafeListScreen';
+import CommunityScreen from './components/submain_comm/CommunityScreen';
 import ShoppingHome from './components/submain_shop/ShoppingHome';
 import ProductDetailPage from './components/submain_shop/ProductDetailPage';
 import { Product } from './components/main/CommerceSection';
 import FloatingRecordBtn from './components/common/FloatingRecordBtn';
 import CaffeineLogScreen, { CaffeineRecord } from './components/submain_log/CaffeineLogScreen';
 import CaffeineRecordPopup from './components/popup/CaffeineRecordPopup';
-import EditRecordModal from './components/popup/EditRecordModal';
 import './index.css';
 
 function App() {
@@ -58,32 +58,45 @@ function App() {
     };
 
     const handleRecordComplete = (data: any) => {
-        // Create new record
-        const newRecord: CaffeineRecord = {
-            id: Date.now().toString(),
-            brand: data.brand || 'Unknown',
-            menu: data.menu || 'Unknown Menu',
-            size: data.size || 'Standard',
-            caffeine: data.caffeine || 0, // Ensure popup passes this or calculate it
-            date: data.date || new Date(),
-            isDecaf: data.isDecaf || false
-        };
-
-        setCaffeineRecords(prev => [newRecord, ...prev]);
-        setIsRecordPopupOpen(false);
+        // If data has an ID (passed from edit flow), update existing
+        if (data.id) {
+            setCaffeineRecords(prev => prev.map(r =>
+                r.id === data.id ? {
+                    ...r,
+                    brand: data.brand,
+                    menu: data.menu,
+                    size: data.size,
+                    caffeine: data.caffeine,
+                    isDecaf: data.isDecaf,
+                    // keep original date if not passed, or update if user wants to change time (currently popup sets `date: new Date()`)
+                    // The popup sets `date: new Date()` currently which resets time to NOW. 
+                    // Ideally we might want to keep original time if just editing info?
+                    // But for now let's respect the popup's return (which includes date).
+                    date: data.date
+                } : r
+            ));
+            setEditingRecord(null);
+        } else {
+            // Create new record
+            const newRecord: CaffeineRecord = {
+                id: Date.now().toString(),
+                brand: data.brand || 'Unknown',
+                menu: data.menu || 'Unknown Menu',
+                size: data.size || 'Standard',
+                caffeine: data.caffeine || 0,
+                date: data.date || new Date(),
+                isDecaf: data.isDecaf || false
+            };
+            setCaffeineRecords(prev => [newRecord, ...prev]);
+            setIsRecordPopupOpen(false);
+        }
     };
 
     const handleDeleteRecord = (id: string) => {
         setCaffeineRecords(prev => prev.filter(r => r.id !== id));
     };
 
-    // Update record after editing
-    const handleSaveEdit = (id: string, newDate: Date, newCaffeine: number) => {
-        setCaffeineRecords(prev => prev.map(r =>
-            r.id === id ? { ...r, date: newDate, caffeine: newCaffeine } : r
-        ));
-        setEditingRecord(null);
-    };
+    // Update record after editing (handlded by popup now)
 
     const renderContent = () => {
         if (currentTab === 'cafe') {
@@ -117,6 +130,10 @@ function App() {
                     }}
                 />
             );
+        }
+
+        if (currentTab === 'comm') {
+            return <CommunityScreen />;
         }
 
         if (currentTab === 'shop') {
@@ -166,12 +183,12 @@ function App() {
             {renderContent()}
             {currentTab !== 'product-detail' && (
                 <>
-                    <FloatingRecordBtn onClick={() => setIsRecordPopupOpen(true)} />
+                    {currentTab !== 'comm' && <FloatingRecordBtn onClick={() => setIsRecordPopupOpen(true)} />}
                     <BottomNavigation activeTab={currentTab} onTabChange={setCurrentTab} />
                 </>
             )}
 
-            {/* Global Popup Layer */}
+            {/* Global Popup Layer (Create) */}
             {isRecordPopupOpen && (
                 <CaffeineRecordPopup
                     onClose={() => setIsRecordPopupOpen(false)}
@@ -179,12 +196,16 @@ function App() {
                 />
             )}
 
-            {/* Edit Modal Layer */}
+            {/* Edit Popup Layer (Edit) */}
             {editingRecord && (
-                <EditRecordModal
-                    record={editingRecord}
+                <CaffeineRecordPopup
+                    initialRecord={editingRecord}
                     onClose={() => setEditingRecord(null)}
-                    onSave={handleSaveEdit}
+                    onComplete={(data) => handleRecordComplete({
+                        ...data,
+                        id: editingRecord.id,
+                        date: editingRecord.date // Keep original date/time
+                    })}
                 />
             )}
         </div>

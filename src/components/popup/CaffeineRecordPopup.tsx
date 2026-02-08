@@ -135,11 +135,13 @@ const CATEGORY_MENUS: Record<string, FranchiseMenu[]> = {
     ]
 };
 
+import { CaffeineRecord } from '../submain_log/CaffeineLogScreen';
+
 interface CaffeineRecordPopupProps {
     onClose: () => void;
     onComplete: (data: any) => void;
+    initialRecord?: CaffeineRecord | null;
 }
-
 
 // Mock Franchise Data
 const FRANCHISES = [
@@ -198,7 +200,7 @@ const PERSONAL_MENUS: Record<string, Record<string, PersonalMenuItem[]>> = {
 
 const ITEMS_PER_PAGE = 6;
 
-const CaffeineRecordPopup: React.FC<CaffeineRecordPopupProps> = ({ onClose, onComplete }) => {
+const CaffeineRecordPopup: React.FC<CaffeineRecordPopupProps> = ({ onClose, onComplete, initialRecord }) => {
     const [activeTab, setActiveTab] = useState('franchise');
     const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
     const [selectedMenu, setSelectedMenu] = useState('');
@@ -218,7 +220,7 @@ const CaffeineRecordPopup: React.FC<CaffeineRecordPopupProps> = ({ onClose, onCo
     const [selectedPersonalShop, setSelectedPersonalShop] = useState<{ id: string, name: string, address: string } | null>(null);
     const [personalCategory, setPersonalCategory] = useState<'Coffee' | 'Tea' | 'Other'>('Coffee');
     const [selectedPersonalMenu, setSelectedPersonalMenu] = useState<PersonalMenuItem | null>(null);
-    const [personalMenuPage, setPersonalMenuPage] = useState(0); // Added for Personal Pagination
+    const [personalMenuPage, setPersonalMenuPage] = useState(0);
 
     // --- State for Commercial Product Tab (Refactored) ---
     interface CommercialProduct {
@@ -257,6 +259,67 @@ const CaffeineRecordPopup: React.FC<CaffeineRecordPopupProps> = ({ onClose, onCo
     const [selectedCommProduct, setSelectedCommProduct] = useState<CommercialProduct | null>(null);
     const [commQuantity, setCommQuantity] = useState(1);
     const [visibleProductCount, setVisibleProductCount] = useState(10);
+
+    // Initialization Effect for Edit Mode
+    useEffect(() => {
+        if (initialRecord) {
+            const { brand, menu, size, isDecaf } = initialRecord;
+
+            // 1. Check Commercial Products
+            const productMatch = MOCK_COMMERCIAL_PRODUCTS.find(p => p.name === menu && p.brand === brand);
+            if (productMatch) {
+                setActiveTab('product');
+                setSelectedCommProduct(productMatch);
+                // Parse quantity from size string e.g. "2 can" or "1 stick"
+                const qtyMatch = size.match(/(\d+)/);
+                if (qtyMatch) {
+                    setCommQuantity(parseInt(qtyMatch[0], 10));
+                }
+                return;
+            }
+
+            // 2. Check Personal Cafes
+            const personalMatch = PERSONAL_CAFES.find(s => s.name === brand);
+            if (personalMatch) {
+                setActiveTab('personal');
+                setSelectedPersonalShop(personalMatch);
+
+                // Find menu in PERSONAL_MENUS
+                let foundMenu = null;
+                const shopMenus = PERSONAL_MENUS[personalMatch.id];
+                if (shopMenus) {
+                    for (const cat of ['Coffee', 'Tea', 'Other'] as const) {
+                        const m = shopMenus[cat]?.find((item: PersonalMenuItem) => item.name === menu);
+                        if (m) {
+                            foundMenu = m;
+                            setPersonalCategory(cat);
+                            break;
+                        }
+                    }
+                }
+                if (foundMenu) setSelectedPersonalMenu(foundMenu);
+                return;
+            }
+
+            // 3. Default to Franchise
+            // Check if brand is in FRANCHISES
+            const franchiseMatch = FRANCHISES.find(f => f.name === brand);
+            if (franchiseMatch) {
+                setActiveTab('franchise');
+                setSelectedBrand(brand);
+                setSelectedMenu(menu);
+                setSelectedSize(size);
+                setIsDecaf(isDecaf);
+                return;
+            }
+
+            // 4. Fallback (e.g. if brand not found, maybe just set Franchise and Fill inputs)
+            setActiveTab('franchise');
+            setSelectedBrand(brand);
+            setSelectedMenu(menu);
+            setSelectedSize(size);
+        }
+    }, [initialRecord]);
 
     // Filtered Products
     const filteredCommProducts = MOCK_COMMERCIAL_PRODUCTS.filter(p =>
@@ -507,18 +570,53 @@ const CaffeineRecordPopup: React.FC<CaffeineRecordPopupProps> = ({ onClose, onCo
     };
 
     // Mock completing
+    // Helper to calculate total caffeine
+    const calculateCaffeine = () => {
+        let total = 0;
+        if (activeTab === 'franchise') {
+            if (selectedBrand && selectedMenu) {
+                let found = null;
+                for (const cat in CATEGORY_MENUS) {
+                    const match = CATEGORY_MENUS[cat].find(m => m.name === selectedMenu);
+                    if (match) {
+                        found = match;
+                        break;
+                    }
+                }
+                total = found ? found.caffeine : 0;
+            }
+        } else if (activeTab === 'product' && selectedCommProduct) {
+            total = selectedCommProduct.caffeinePerUnit * commQuantity;
+        } else if (activeTab === 'personal' && selectedPersonalMenu) {
+            total = selectedPersonalMenu.caffeine;
+        }
+        return total;
+    };
+
     const handleComplete = () => {
-        if (!selectedBrand) {
-            alert("브랜드를 선택해 주세요!");
+        const caffeineAmount = calculateCaffeine();
+
+        let data: any = {
+            caffeine: caffeineAmount,
+            date: new Date(),
+            isDecaf: isDecaf
+        };
+
+        if (activeTab === 'franchise') {
+            if (!selectedBrand) { alert("브랜드를 선택해 주세요!"); return; }
+            data = { ...data, brand: selectedBrand, menu: selectedMenu, size: selectedSize, isDecaf };
+        } else if (activeTab === 'personal') {
+            if (!selectedPersonalShop) return;
+            data = { ...data, brand: selectedPersonalShop.name, menu: selectedPersonalMenu?.name || 'Unknown', size: 'Standard', isDecaf: false };
+        } else if (activeTab === 'product') {
+            if (!selectedCommProduct) return;
+            data = { ...data, brand: selectedCommProduct.brand, menu: selectedCommProduct.name, size: `${commQuantity} ${selectedCommProduct.unit}`, isDecaf: false };
+        } else {
+            // Bookmark or other? For now ignore
             return;
         }
-        onComplete({
-            brand: selectedBrand,
-            menu: selectedMenu,
-            size: selectedSize,
-            isDecaf,
-            date: new Date()
-        });
+
+        onComplete(data);
         onClose();
     };
 
@@ -1046,28 +1144,7 @@ const CaffeineRecordPopup: React.FC<CaffeineRecordPopupProps> = ({ onClose, onCo
                     <div className="caffeine-summary-row">
                         <span className="caffeine-summary-label">총 카페인 함량</span>
                         <div className="caffeine-summary-value">
-                            {(() => {
-                                let total = 0;
-                                if (activeTab === 'franchise') {
-                                    if (selectedBrand && selectedMenu) {
-                                        // Search in all categories to find the match
-                                        let found = null;
-                                        for (const cat in CATEGORY_MENUS) {
-                                            const match = CATEGORY_MENUS[cat].find(m => m.name === selectedMenu);
-                                            if (match) {
-                                                found = match;
-                                                break;
-                                            }
-                                        }
-                                        total = found ? found.caffeine : 0;
-                                    }
-                                } else if (activeTab === 'product' && selectedCommProduct) {
-                                    total = selectedCommProduct.caffeinePerUnit * commQuantity;
-                                } else if (activeTab === 'personal' && selectedPersonalMenu) {
-                                    total = selectedPersonalMenu.caffeine;
-                                }
-                                return total;
-                            })()}
+                            {calculateCaffeine()}
                             <small> mg</small>
                         </div>
                     </div>
@@ -1085,7 +1162,7 @@ const CaffeineRecordPopup: React.FC<CaffeineRecordPopupProps> = ({ onClose, onCo
                                 (activeTab === 'product' && !selectedCommProduct)
                             }
                         >
-                            기록하기
+                            {initialRecord ? '수정하기' : '기록하기'}
                         </button>
                     </div>
                 </div>

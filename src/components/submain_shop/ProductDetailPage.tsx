@@ -146,11 +146,9 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product, onBack, 
                 <div className="action-icon-group">
                     <button className="icon-action-btn" aria-label="Add to Wishlist">
                         <IoHeartOutline size={24} />
-                        <span className="icon-label">찜하기</span>
                     </button>
                     <button className="icon-action-btn" aria-label="Share">
                         <IoShareSocialOutline size={24} />
-                        <span className="icon-label">공유</span>
                     </button>
                 </div>
                 <button className="buy-btn">
