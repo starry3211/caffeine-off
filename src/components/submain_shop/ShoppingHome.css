@@ -257,13 +257,31 @@
     opacity: 0.6;
 }
 
+/* Search Input */
+.popup-search-box {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    /* Added right padding for icon */
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    /* Ensure padding doesn't widen the input out of container */
+}
+
+.popup-search-box:focus {
+    border-color: #10353A;
+}
+
 /* Options Panel */
 .filter-options-panel {
     margin-top: 16px;
-    padding: 16px 20px;
-    background: #F8F9FA;
-    border-top: 1px solid #F0F0F0;
-    border-bottom: 1px solid #F0F0F0;
+    padding: 0 20px;
+    background: transparent;
     display: flex;
     gap: 8px;
     flex-wrap: wrap;

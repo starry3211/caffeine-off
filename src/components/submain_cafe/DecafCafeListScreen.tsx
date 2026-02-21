@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './DecafCafeListScreen.css';
 import { BiTargetLock, BiChevronDown } from 'react-icons/bi';
+import { IoSearchOutline } from 'react-icons/io5';
 import GlobalNavigation from '../main/GlobalNavigation';
 
 interface CafeItem {
@@ -88,47 +89,55 @@ const DecafCafeListScreen: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="sort-row">
-                        <button
-                            className={`sort-btn ${sortMode === 'popular' ? 'active' : ''}`}
-                            onClick={() => setSortMode('popular')}
-                        >
-                            인기순
-                        </button>
-                        <button
-                            className={`sort-btn ${sortMode === 'distance' ? 'active' : ''}`}
-                            onClick={() => setSortMode('distance')}
-                        >
-                            거리순
-                        </button>
+                    {/* Search Input */}
+                    <div className="search-container" style={{ position: 'relative', margin: '16px 20px 0' }}>
+                        <input
+                            type="text"
+                            className="popup-search-box"
+                            placeholder="카페 또는 메뉴 검색"
+                        />
+                        <IoSearchOutline style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#999', fontSize: '20px' }} />
                     </div>
                 </div>
-            </div>
 
-            <div className="cafe-list-container">
-                {items.map((item, index) => (
-                    <div
-                        key={`${item.id}-${index}`}
-                        className="cafe-list-item"
-                        ref={index === items.length - 1 ? lastItemRef : undefined}
-                    >
-                        <div className="item-icon">
-                            <div className="brand-logo-placeholder">
-                                {item.brand[0]}
-                            </div>
-                        </div>
-                        <div className="item-info">
-                            <div className="rank-brand-row">
-                                <span className="item-brand">{item.brand}</span>
-                                <span className="location-badge">내주변</span>
-                            </div>
-                            <div className="item-menu">
-                                {item.menu} <span className="item-caffeine">({item.caffeine}mg)</span>
-                            </div>
+                <div className="cafe-list-container">
+                    <div className="shop-list-header" style={{ paddingTop: '16px' }}>
+                        <span className="product-count">총 {items.length}개</span>
+                        <div className="sort-select-wrapper">
+                            <select
+                                className="sort-select"
+                                value={sortMode}
+                                onChange={(e) => setSortMode(e.target.value as 'popular' | 'distance')}
+                            >
+                                <option value="popular">인기순</option>
+                                <option value="distance">거리순</option>
+                            </select>
                         </div>
                     </div>
-                ))}
-                {loading && <div className="loading-indicator">목록을 불러오는 중...</div>}
+                    {items.map((item, index) => (
+                        <div
+                            key={`${item.id}-${index}`}
+                            className="cafe-list-item"
+                            ref={index === items.length - 1 ? lastItemRef : undefined}
+                        >
+                            <div className="item-icon">
+                                <div className="brand-logo-placeholder">
+                                    {item.brand[0]}
+                                </div>
+                            </div>
+                            <div className="item-info">
+                                <div className="rank-brand-row">
+                                    <span className="item-brand">{item.brand}</span>
+                                    <span className="location-badge">내주변</span>
+                                </div>
+                                <div className="item-menu">
+                                    {item.menu} <span className="item-caffeine">({item.caffeine}mg)</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    {loading && <div className="loading-indicator">목록을 불러오는 중...</div>}
+                </div>
             </div>
         </div>
     );

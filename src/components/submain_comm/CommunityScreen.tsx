@@ -63,7 +63,6 @@ const CATEGORIES = ['#전체', '#디카페인후기', '#카페추천', '#슬립�
 
 const CommunityScreen: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState('#전체');
-    const [vote, setVote] = useState<string | null>(null);
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
     const [isWriteBtnExpanded, setIsWriteBtnExpanded] = useState(true);
 
@@ -97,30 +96,7 @@ const CommunityScreen: React.FC = () => {
             </header>
 
             <div className="comm-scroll-content">
-                {/* 2. Banner (Voting) */}
-                <section className="comm-banner">
-                    <div className="banner-title">오늘의 디카페인 지수는 어떤가요?</div>
-                    <div className="vote-options">
-                        <button
-                            className={`vote-btn ${vote === 'good' ? 'active' : ''}`}
-                            onClick={() => setVote('good')}
-                        >
-                            쌩쌩해요 ⚡️
-                        </button>
-                        <button
-                            className={`vote-btn ${vote === 'soso' ? 'active' : ''}`}
-                            onClick={() => setVote('soso')}
-                        >
-                            견딜만해요 👌
-                        </button>
-                        <button
-                            className={`vote-btn ${vote === 'tired' ? 'active' : ''}`}
-                            onClick={() => setVote('tired')}
-                        >
-                            좀 졸려요 😴
-                        </button>
-                    </div>
-                </section>
+
 
                 {/* 3. Categories */}
                 <section className="comm-categories">

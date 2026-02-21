@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { IoSearchOutline } from 'react-icons/io5';
 import './ShoppingHome.css';
 import { PRODUCTS, Product } from '../main/CommerceSection';
 import GlobalNavigation from '../main/GlobalNavigation';
@@ -44,6 +45,9 @@ const ShoppingHome: React.FC<{ initialTab?: string; onProductClick?: (product: P
         taste: '',
         sort: '함량 낮은순'
     });
+
+    // Search State
+    const [searchText, setSearchText] = useState('');
 
     const TABS = ["🌙 디카페인", "🫧 Low 카페인", "🌿 릴렉스 티"];
 
@@ -103,8 +107,10 @@ const ShoppingHome: React.FC<{ initialTab?: string; onProductClick?: (product: P
         setOpenFilter(null);
     };
 
-    // Filter Logic (Mock)
-    const filteredProducts = products;
+    // Filter Logic
+    const filteredProducts = products.filter(p =>
+        p.name.includes(searchText) || (p.brand && p.brand.includes(searchText))
+    );
 
     // Drag Scroll Logic
     const scrollRef = React.useRef<HTMLDivElement>(null);
@@ -183,41 +189,43 @@ const ShoppingHome: React.FC<{ initialTab?: string; onProductClick?: (product: P
 
             {/* Section: Precision Filter Chips (Replaces Slider & Banner) */}
             <section className="precision-filter-section">
-                {/* Dimming Layer (Right Side) */}
-                <div className="filter-dimming-layer"></div>
+                <div style={{ position: 'relative' }}>
+                    {/* Dimming Layer (Right Side) */}
+                    <div className="filter-dimming-layer"></div>
 
-                {/* Reset Button (Top Right) */}
-                <button
-                    className="filter-reset-btn"
-                    onClick={resetFilters}
-                    aria-label="초기화"
-                >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                        <path d="M3 3v5h5" />
-                    </svg>
-                </button>
+                    {/* Reset Button (Top Right) */}
+                    <button
+                        className="filter-reset-btn"
+                        onClick={resetFilters}
+                        aria-label="초기화"
+                    >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                            <path d="M3 3v5h5" />
+                        </svg>
+                    </button>
 
-                {/* Top Row: Filter Categories */}
-                <div
-                    className="filter-category-row"
-                    ref={scrollRef}
-                    onMouseDown={handleMouseDown}
-                    onMouseLeave={handleMouseLeave}
-                    onMouseUp={handleMouseUp}
-                    onMouseMove={handleMouseMove}
-                >
-                    {Object.entries(FILTER_DATA).map(([key, data]) => (
-                        <button
-                            key={key}
-                            className={`filter-category-btn ${selectedFilters[key] ? 'active' : ''} ${openFilter === key ? 'open' : ''}`}
-                            onClick={() => onFilterClick(key)}
-                        >
-                            {selectedFilters[key] ? `${data.label}: ${selectedFilters[key]}` : data.label}
-                            {selectedFilters[key] && <span className="filter-remove" onClick={(e) => { e.stopPropagation(); removeFilter(key); }}>ⓧ</span>}
-                            {!selectedFilters[key] && <span className="filter-arrow">▼</span>}
-                        </button>
-                    ))}
+                    {/* Top Row: Filter Categories */}
+                    <div
+                        className="filter-category-row"
+                        ref={scrollRef}
+                        onMouseDown={handleMouseDown}
+                        onMouseLeave={handleMouseLeave}
+                        onMouseUp={handleMouseUp}
+                        onMouseMove={handleMouseMove}
+                    >
+                        {Object.entries(FILTER_DATA).map(([key, data]) => (
+                            <button
+                                key={key}
+                                className={`filter-category-btn ${selectedFilters[key] ? 'active' : ''} ${openFilter === key ? 'open' : ''}`}
+                                onClick={() => onFilterClick(key)}
+                            >
+                                {selectedFilters[key] ? `${data.label}: ${selectedFilters[key]}` : data.label}
+                                {selectedFilters[key] && <span className="filter-remove" onClick={(e) => { e.stopPropagation(); removeFilter(key); }}>ⓧ</span>}
+                                {!selectedFilters[key] && <span className="filter-arrow">▼</span>}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Sub Row: Filter Options (Expandable) */}
@@ -234,6 +242,18 @@ const ShoppingHome: React.FC<{ initialTab?: string; onProductClick?: (product: P
                         ))}
                     </div>
                 )}
+
+                {/* Sub Row: Search Input */}
+                <div className="search-container" style={{ position: 'relative', margin: '16px 20px 0' }}>
+                    <input
+                        type="text"
+                        className="popup-search-box"
+                        placeholder="브랜드 또는 제품명을 입력하세요"
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                    />
+                    <IoSearchOutline style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', color: '#999', fontSize: '20px' }} />
+                </div>
             </section>
 
             {/* Section 4: Product List */}
